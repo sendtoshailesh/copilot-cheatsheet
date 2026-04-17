@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infographic — AI as Execution</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .poster {
+    width: 1080px;
+    min-height: 1920px;
+    background:
+      radial-gradient(ellipse 100% 30% at 50% 0%, rgba(124,114,255,0.14), transparent),
+      radial-gradient(ellipse 60% 20% at 80% 55%, rgba(63,185,80,0.07), transparent),
+      radial-gradient(ellipse 50% 20% at 15% 85%, rgba(88,166,255,0.06), transparent),
+      #0d1117;
+    color: #e6edf3;
+    padding: 64px 60px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* decorative grid lines */
+  .poster::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 539px, rgba(48,54,61,0.25) 539px, rgba(48,54,61,0.25) 540px),
+      repeating-linear-gradient(0deg, transparent, transparent 959px, rgba(48,54,61,0.15) 959px, rgba(48,54,61,0.15) 960px);
+    pointer-events: none;
+  }
+
+  /* top gradient bar */
+  .top-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #7c72ff, #2ea44f, #58a6ff);
+  }
+
+  /* ---- HEADER ---- */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #8b949e;
+  }
+
+  .date-tag {
+    font-size: 13px;
+    color: #8b949e;
+    border: 1px solid #30363d;
+    padding: 5px 14px;
+    border-radius: 20px;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #21262d;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+    background: linear-gradient(135deg, #fff 10%, #58a6ff 55%, #bc8cff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .sub {
+    font-size: 19px;
+    color: #8b949e;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+
+  /* ---- SHIFT VISUAL ---- */
+  .shift-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 32px 0 0;
+  }
+
+  .shift-box {
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .shift-old {
+    background: rgba(240,136,62,0.08);
+    border: 1.5px solid rgba(240,136,62,0.35);
+    color: #f0883e;
+  }
+
+  .shift-old small, .shift-new small {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+
+  .shift-arrow {
+    font-size: 28px;
+    color: #484f58;
+  }
+
+  .shift-new {
+    background: rgba(63,185,80,0.08);
+    border: 1.5px solid rgba(63,185,80,0.35);
+    color: #3fb950;
+  }
+
+  /* ---- SECTION TITLE ---- */
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #484f58;
+    margin-bottom: 24px;
+    margin-top: 40px;
+  }
+
+  /* ---- 3 PATTERNS ---- */
+  .patterns {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 8px;
+  }
+
+  .pattern {
+    flex: 1;
+    border-radius: 16px;
+    border: 1px solid #21262d;
+    background: rgba(22,27,34,0.7);
+    padding: 28px 24px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pattern::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .p-purple::before { background: #bc8cff; }
+  .p-cyan::before   { background: #76e3ea; }
+  .p-green::before  { background: #3fb950; }
+
+  .pattern .p-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+
+  .p-purple .p-num { background: rgba(188,140,255,0.12); color: #bc8cff; }
+  .p-cyan .p-num   { background: rgba(118,227,234,0.12); color: #76e3ea; }
+  .p-green .p-num  { background: rgba(63,185,80,0.12);   color: #3fb950; }
+
+  .pattern h3 {
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #e6edf3;
+  }
+
+  .pattern .p-desc {
+    font-size: 14px;
+    color: #8b949e;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .p-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .p-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #c9d1d9;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.025);
+    border-radius: 8px;
+    border: 1px solid rgba(48,54,61,0.5);
+  }
+
+  .p-item .pi-icon { font-size: 16px; flex-shrink: 0; }
+
+  /* ---- KEY TAKEAWAY ---- */
+  .takeaway-bar {
+    margin-top: 32px;
+    padding: 24px 28px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(88,166,255,0.25);
+    background: rgba(88,166,255,0.04);
+    text-align: center;
+  }
+
+  .takeaway-bar .tb-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #58a6ff;
+    margin-bottom: 10px;
+  }
+
+  .takeaway-bar .tb-quote {
+    font-size: 22px;
+    font-weight: 700;
+    color: #e6edf3;
+    line-height: 1.35;
+  }
+
+  /* ---- EQUATION ---- */
+  .equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .eq-box {
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    border: 1px solid #30363d;
+    background: #161b22;
+    color: #e6edf3;
+  }
+
+  .eq-op {
+    font-size: 22px;
+    color: #484f58;
+    font-weight: 300;
+  }
+
+  .eq-result {
+    border-color: #3fb950 !important;
+    color: #3fb950;
+    background: rgba(63,185,80,0.06);
+  }
+
+  .eq-sub {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(63,185,80,0.65);
+    margin-top: 3px;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid #21262d;
+  }
+
+  .footer-left {
+    font-size: 13px;
+    color: #484f58;
+    line-height: 1.6;
+  }
+
+  .footer-left a {
+    color: #58a6ff;
+    text-decoration: none;
+  }
+
+  .footer-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7c72ff, #2ea44f);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+  }
+
+  /* print helper */
+  @media print {
+    body { background: #0d1117; padding: 0; }
+    .poster { min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <div class="top-accent"></div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 16 16" fill="#e6edf3"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub Copilot SDK
+    </div>
+    <div class="date-tag">March 2026 &middot; github.blog</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>The Era of &ldquo;AI&nbsp;as&nbsp;Text&rdquo;<br>Is Over.</h1>
+    <p class="sub">AI is shifting from prompt-response interactions to <strong style="color:#e6edf3;">programmable execution</strong>. The GitHub Copilot SDK makes agentic workflows available as infrastructure inside your applications.</p>
+
+    <div class="shift-row">
+      <div class="shift-box shift-old">
+        <small>Before</small>
+        Text In &rarr; Text Out
+      </div>
+      <div class="shift-arrow">&raquo;</div>
+      <div class="shift-box shift-new">
+        <small>Now</small>
+        Intent In &rarr; Execution Out
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 PATTERNS -->
+  <div class="section-title">Three Patterns Powering the Shift</div>
+
+  <div class="patterns">
+    <!-- Pattern 1 -->
+    <div class="pattern p-purple">
+      <div class="p-num">1</div>
+      <h3>Delegate Multi-Step Work to Agents</h3>
+      <p class="p-desc">Pass intent, not fixed scripts. The agent plans &amp; adapts at runtime.</p>
+      <div class="p-items">
+        <div class="p-item"><span class="pi-icon">&#x1F50D;</span> Explores the repo</div>
+        <div class="p-item"><span class="pi-icon">&#x1F4CB;</span> Plans steps dynamically</div>
+        <div class="p-item"><span class="pi-icon">&#x1F4DD;</span> Modifies files &amp; runs commands</div>
+        <div class="p-item"><span class="pi-icon">&#x1F504;</span> Adapts on failure</div>
+        <div class="p-item"><span class="pi-icon">&#x1F6E1;&#xFE0F;</span> Operates within boundaries</div>
+      </div>
+    </div>
+
+    <!-- Pattern 2 -->
+    <div class="pattern p-cyan">
+      <div class="p-num">2</div>
+      <h3>Ground Execution in Structured Context</h3>
+      <p class="p-desc">MCP gives agents permissioned access to real tools &amp; real data.</p>
+      <div class="p-items">
+        <div class="p-item"><span class="pi-icon">&#x1F527;</span> Domain-specific tools &amp; skills</div>
+        <div class="p-item"><span class="pi-icon">&#x1F517;</span> Composable MCP protocol</div>
+        <div class="p-item"><span class="pi-icon">&#x1F4CA;</span> Runtime queries: APIs, graphs</div>
+        <div class="p-item"><span class="pi-icon">&#x1F512;</span> Safety constraints built in</div>
+        <div class="p-item"><span class="pi-icon">&#x1F4C2;</span> No guesswork in prompts</div>
+      </div>
+    </div>
+
+    <!-- Pattern 3 -->
+    <div class="pattern p-green">
+      <div class="p-num">3</div>
+      <h3>Embed Execution Beyond the IDE</h3>
+      <p class="p-desc">AI becomes an app-layer capability — available wherever your software runs.</p>
+      <div class="p-items">
+        <div class="p-item"><span class="pi-icon">&#x1F5A5;&#xFE0F;</span> Desktop applications</div>
+        <div class="p-item"><span class="pi-icon">&#x2699;&#xFE0F;</span> Internal operational tools</div>
+        <div class="p-item"><span class="pi-icon">&#x1F504;</span> Background services</div>
+        <div class="p-item"><span class="pi-icon">&#x2601;&#xFE0F;</span> SaaS platforms</div>
+        <div class="p-item"><span class="pi-icon">&#x26A1;</span> Event-driven systems</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY TAKEAWAY -->
+  <div class="takeaway-bar">
+    <div class="tb-label">&#x1F4A1; Key Takeaway</div>
+    <div class="tb-quote">&ldquo;If your application can trigger logic,<br>it can trigger agentic execution.&rdquo;</div>
+  </div>
+
+  <!-- EQUATION -->
+  <div class="equation">
+    <div class="eq-box">Your App's Intent</div>
+    <div class="eq-op">+</div>
+    <div class="eq-box">Copilot SDK</div>
+    <div class="eq-op">+</div>
+    <div class="eq-box">MCP Tools</div>
+    <div class="eq-op">=</div>
+    <div class="eq-box eq-result">
+      Agentic Execution
+      <span class="eq-sub">Constrained &middot; Observable &middot; Adaptive</span>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-left">
+      Source: <a href="https://github.blog/ai-and-ml/github-copilot/the-era-of-ai-as-text-is-over-execution-is-the-new-interface/">GitHub Blog</a> &middot; Gwen Davis<br>
+      &#x1F501; Repost &nbsp; &#x1F4BE; Save &nbsp; &#x1F4AC; Share your take below
+    </div>
+    <a class="footer-cta" href="https://github.com/github/copilot-sdk/" target="_blank" rel="noopener">Explore Copilot SDK &rarr;</a>
+  </div>
+</div>
+
+</body>
+</html>

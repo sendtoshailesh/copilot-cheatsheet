@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>GitHub Copilot CLI Workflow Cheatsheet – 2026 Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f0f4f8;
+    color: #1a2332;
+    padding: 32px;
+    width: 1200px;
+  }
+
+  .page {
+    background: #f6f9fc;
+    border-radius: 18px;
+    padding: 36px 32px 28px;
+    border: 2px solid #d0dbe8;
+  }
+
+  /* ── Header ───────────────────────────── */
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+  }
+  .header h1 .plain { color: #1a2332; }
+  .header h1 .accent { color: #2563eb; font-style: italic; }
+  .header .subtitle {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #5a6a7a;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Grid ──────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ── Card ──────────────────────────────── */
+  .card {
+    background: #ffffff;
+    border: 1.5px solid #d6e2f0;
+    border-radius: 12px;
+    padding: 14px 16px 14px;
+    position: relative;
+  }
+  .card h2 {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .card p, .card li, .card td, .card th {
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: #3a4a5c;
+  }
+  .card ul { list-style: none; padding: 0; }
+  .card ul li { padding-left: 16px; position: relative; margin-bottom: 2px; }
+  .card ul li::before {
+    content: '◎';
+    position: absolute;
+    left: 0;
+    color: #2563eb;
+    font-size: 10px;
+    top: 1px;
+  }
+
+  .card h3 {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 8px 0 4px;
+    color: #1a2332;
+  }
+
+  /* code blocks */
+  code, .mono {
+    font-family: 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 10.5px;
+    background: #edf2f7;
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: #1e3a5f;
+  }
+  pre {
+    background: #edf2f7;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.6;
+    color: #1e3a5f;
+    overflow: hidden;
+    margin: 6px 0;
+    border: 1px solid #d6e2f0;
+  }
+
+  /* pill badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+  .badge-blue { background: #2563eb; }
+  .badge-purple { background: #7c3aed; }
+  .badge-teal { background: #0d9488; }
+  .badge-orange { background: #ea580c; }
+  .badge-green { background: #16a34a; }
+  .badge-slate { background: #475569; }
+
+  /* file tree */
+  .tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.7;
+    color: #1e3a5f;
+    background: #edf2f7;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: 1px solid #d6e2f0;
+  }
+
+  /* table */
+  .ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+  }
+  .ref-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 6px;
+    background: #e0e8f5;
+    border-radius: 4px;
+    color: #1e3a5f;
+  }
+  .ref-table td {
+    padding: 3px 6px;
+    font-size: 10.5px;
+    border-bottom: 1px solid #edf2f7;
+  }
+  .ref-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: #2563eb;
+    white-space: nowrap;
+  }
+
+  /* workflow steps */
+  .workflow-step {
+    background: #edf2f7;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 4px 0;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: #1e3a5f;
+    border: 1px solid #d6e2f0;
+  }
+  .workflow-step.highlight {
+    background: #2563eb;
+    color: #fff;
+    border-color: #1d4ed8;
+  }
+  .workflow-arrow {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 10px;
+    line-height: 1;
+  }
+
+  /* span-2 for wide cards */
+  .span-2 { grid-column: span 1; }
+
+  /* note callout */
+  .note {
+    background: #eff6ff;
+    border-left: 3px solid #2563eb;
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
+    margin: 6px 0;
+    font-size: 10.5px;
+    color: #1e3a5f;
+  }
+
+  /* icon placeholder */
+  .copilot-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 900;
+    margin: 4px auto;
+  }
+
+  /* hierarchy diagram */
+  .hierarchy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    line-height: 1.75;
+    color: #1e3a5f;
+  }
+  .hierarchy .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    color: #64748b;
+    font-weight: 400;
+  }
+
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .mini-card {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 10.5px;
+    color: #334155;
+  }
+  .mini-card strong {
+    display: block;
+    font-size: 10px;
+    color: #1e3a5f;
+  }
+
+  /* footer */
+  .footer {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 10px;
+    color: #94a3b8;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════ GRID ═══════════ -->
+<div class="grid">
+
+<!-- ──────── 1. Getting Started ──────── -->
+<div class="card">
+  <h2><span class="num">1</span> Getting Started</h2>
+  <p>Install GitHub Copilot CLI (requires active Copilot subscription)</p>
+  <pre>curl -fsSL https://gh.io/copilot-install | bash</pre>
+  <p>Or via Homebrew / npm:</p>
+  <pre>brew install copilot-cli
+npm install -g @github/copilot</pre>
+  <p style="margin-top:6px">Launch &amp; authenticate:</p>
+  <pre>cd your-project
+copilot
+/login</pre>
+  <div class="note">Scans your codebase and loads custom instructions automatically on start.</div>
+</div>
+
+<!-- ──────── 2. Understanding Custom Instructions ──────── -->
+<div class="card">
+  <h2><span class="num">2</span> Understanding Custom Instructions</h2>
+  <p><strong>copilot-instructions.md</strong> = Copilot's persistent memory about your project loaded automatically at the start of every session.</p>
+  <div style="margin:6px 0">
+    <span class="badge badge-blue">WHAT</span>
+    <span class="badge badge-purple">WHY</span>
+    <span class="badge badge-teal">HOW</span>
+  </div>
+  <ul>
+    <li>Tech stack &amp; framework versions</li>
+    <li>Directory map &amp; module purposes</li>
+    <li>Architecture &amp; design decisions</li>
+    <li>Build/test/lint commands</li>
+    <li>Coding conventions &amp; gotchas</li>
+  </ul>
+  <h3>## Example Content</h3>
+  <pre># Project: MyApp
+FastAPI + React SPA + Postgres
+
+## Commands
+npm run dev / npm run test
+
+## Architecture
+/app → Next.js App Router pages
+/lib → shared utilities
+/prisma → DB schema &amp; migrations</pre>
+</div>
+
+<!-- ──────── 3. Instructions File Hierarchy ──────── -->
+<div class="card">
+  <h2><span class="num">3</span> Instructions File Hierarchy</h2>
+  <div class="hierarchy" style="margin:6px 0">
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+      <div class="copilot-icon" style="width:32px;height:32px;font-size:16px;border-radius:8px;">C</div>
+      <span style="font-weight:700">Copilot</span>
+    </div>
+    <div style="padding-left:12px;border-left:2px solid #cbd5e1;">
+      <div>~/.copilot/copilot-instructions.md<br><span class="label">Global — all projects</span></div>
+      <div style="margin-top:4px">.github/copilot-instructions.md<br><span class="label">Project — repository root</span></div>
+      <div style="margin-top:4px">.github/instructions/**/*.instructions.md<br><span class="label">Path-specific — scoped context</span></div>
+      <div style="margin-top:4px">AGENTS.md / CLAUDE.md / GEMINI.md<br><span class="label">Agent context files — git root &amp; cwd</span></div>
+    </div>
+  </div>
+  <ul>
+    <li>Path-specific files target matching paths</li>
+    <li>All instruction files are auto-loaded</li>
+    <li>Use <code>/instructions</code> to view &amp; toggle</li>
+  </ul>
+</div>
+
+<!-- ──────── 4. Best Practices ──────── -->
+<div class="card">
+  <h2><span class="num">4</span> Copilot CLI Best Practices</h2>
+  <ul>
+    <li>Run <code>/init</code> first then refine output</li>
+    <li>Be specific in custom instructions</li>
+    <li>Add gotchas Copilot cannot infer</li>
+    <li>Use <code>@filename</code> to include file context</li>
+    <li>Use plan mode for complex features</li>
+    <li>Add path-specific instructions files</li>
+    <li>Keep context clean with <code>/compact</code></li>
+    <li>Commit to Git for team sharing</li>
+    <li>Use <code>/diff</code> to review before commit</li>
+    <li>Start new session per feature</li>
+  </ul>
+</div>
+
+<!-- ──────── 5. Project File Structure ──────── -->
+<div class="card">
+  <h2><span class="num">5</span> Project File Structure</h2>
+  <div class="tree">your project/<br>
+├── .github/<br>
+│   ├── copilot-instructions.md<br>
+│   ├── instructions/<br>
+│   │   ├── frontend.instructions.md<br>
+│   │   └── testing.instructions.md<br>
+│   ├── agents/<br>
+│   │   ├── code-reviewer.md<br>
+│   │   └── deploy.md<br>
+│   ├── extensions/<br>
+│   │   └── my-tool.js<br>
+│   └── lsp.json<br>
+├── AGENTS.md<br>
+└── .gitignore</div>
+</div>
+
+<!-- ──────── 6. Adding Skills (The Superpower) ──────── -->
+<div class="card">
+  <h2><span class="num">6</span> Adding Skills (The Superpower)</h2>
+  <p><strong>Skills</strong> = markdown guides Copilot auto-invokes via natural language.</p>
+  <div class="card-grid-2" style="margin:6px 0">
+    <div class="mini-card">
+      <strong>Project skill</strong>
+      .github/skills/&lt;name&gt;/
+    </div>
+    <div class="mini-card">
+      <strong>Personal skill</strong>
+      ~/.copilot/skills/&lt;name&gt;/
+    </div>
+  </div>
+  <p style="margin-top:4px;">Description field is critical for auto-activation.</p>
+  <pre>---
+name: testing-patterns
+description: Jest testing patterns
+allowed tools: Read, Grep, Glob
+---
+
+# Testing Patterns
+Use describe + it + AAA pattern
+Use factory mocks</pre>
+  <div class="note">Use <code>/skills</code> to manage &amp; toggle skills in CLI.</div>
+</div>
+
+<!-- ──────── 7. Agent & Extension Ideas ──────── -->
+<div class="card">
+  <h2><span class="num">7</span> Agent &amp; Extension Ideas</h2>
+  <div class="card-grid-2">
+    <ul>
+      <li>code-review</li>
+      <li>testing patterns</li>
+      <li>commit messages</li>
+    </ul>
+    <ul>
+      <li>deploy automation</li>
+      <li>security auditor</li>
+      <li>API designer</li>
+    </ul>
+  </div>
+  <h3>Custom Agent Locations</h3>
+  <div class="mini-card" style="margin-top:4px">
+    <strong>User-level</strong> ~/.copilot/agents/
+  </div>
+  <div class="mini-card" style="margin-top:4px">
+    <strong>Repo-level</strong> .github/agents/
+  </div>
+  <div class="mini-card" style="margin-top:4px">
+    <strong>Org-level</strong> .github-private/agents/
+  </div>
+</div>
+
+<!-- ──────── 8. Setting Up MCP Servers ──────── -->
+<div class="card">
+  <h2><span class="num">8</span> Setting Up MCP Servers</h2>
+  <p><strong>MCP</strong> = Model Context Protocol. GitHub MCP server is <strong>built-in</strong>.</p>
+  <div style="margin:6px 0">
+    <span class="badge badge-blue">Built-in</span>
+    <span class="badge badge-purple">Custom</span>
+    <span class="badge badge-teal">Third-party</span>
+  </div>
+  <p>Add via CLI: <code>/mcp add</code></p>
+  <pre>{
+  "mcpServers": {
+    "my-server": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["server.js"],
+      "env": {
+        "API_KEY": "..."
+      }
+    }
+  }
+}</pre>
+  <p style="margin-top:4px;">Config: <code>~/.copilot/mcp-config.json</code></p>
+</div>
+
+<!-- ──────── 9. Permissions & Safety ──────── -->
+<div class="card">
+  <h2><span class="num">9</span> Permissions &amp; Safety</h2>
+  <p>Copilot asks approval before modifying or executing files.</p>
+  <div style="margin:8px 0">
+    <span class="badge badge-green">Yes</span> Allow once<br>
+    <span class="badge badge-blue" style="margin-top:3px">Yes + Session</span> Approve for session<br>
+    <span class="badge badge-orange" style="margin-top:3px">No (Esc)</span> Reject &amp; redirect
+  </div>
+  <h3>Trusted Directories</h3>
+  <pre>/add-dir /path/to/dir
+/list-dirs
+/allow-all  # trust everything</pre>
+  <h3>Launch Flags</h3>
+  <pre>copilot --allow-all
+copilot --yolo  # same as above</pre>
+  <div class="note">Inline rejection feedback lets Copilot adapt its approach.</div>
+</div>
+
+<!-- ──────── 10. The Multi-Layer Architecture ──────── -->
+<div class="card">
+  <h2><span class="num">10</span> The Multi-Layer Architecture</h2>
+  <div style="margin:8px 0">
+    <div style="background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff;border-radius:8px;padding:8px 12px;margin-bottom:6px;">
+      <strong>L1 – Custom Instructions</strong><br>
+      <span style="font-size:10px;opacity:0.9">Persistent context &amp; project rules</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff;border-radius:8px;padding:8px 12px;margin-bottom:6px;">
+      <strong>L2 – Skills</strong><br>
+      <span style="font-size:10px;opacity:0.9">Auto-invoked knowledge packs</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;border-radius:8px;padding:8px 12px;margin-bottom:6px;">
+      <strong>L3 – MCP Servers</strong><br>
+      <span style="font-size:10px;opacity:0.9">External tool integration &amp; APIs</span>
+    </div>
+    <div style="background:linear-gradient(135deg,#ea580c,#f97316);color:#fff;border-radius:8px;padding:8px 12px;">
+      <strong>L4 – Custom Agents</strong><br>
+      <span style="font-size:10px;opacity:0.9">Specialized subagents with own context</span>
+    </div>
+  </div>
+</div>
+
+<!-- ──────── 11. Daily Workflow Pattern ──────── -->
+<div class="card">
+  <h2><span class="num">11</span> Daily Workflow Pattern</h2>
+  <div class="workflow-step highlight">cd project && copilot</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">Shift + Tab → Plan Mode</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">Describe feature intent</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">Shift + Tab → Interactive</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">/compact</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">Esc → rewind if needed</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">/diff → review changes</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step highlight">Commit frequently</div>
+  <div class="workflow-arrow">▼</div>
+  <div class="workflow-step">Start new session per feature</div>
+</div>
+
+<!-- ──────── 12. Quick Reference ──────── -->
+<div class="card">
+  <h2><span class="num">12</span> Quick Reference</h2>
+  <table class="ref-table">
+    <tr><th>Command</th><th>Action</th></tr>
+    <tr><td>/init</td><td>Bootstrap instructions</td></tr>
+    <tr><td>/model</td><td>Switch AI model</td></tr>
+    <tr><td>/compact</td><td>Compress context</td></tr>
+    <tr><td>/diff</td><td>Review all changes</td></tr>
+    <tr><td>/agent</td><td>Browse custom agents</td></tr>
+    <tr><td>/skills</td><td>Manage skills</td></tr>
+    <tr><td>/mcp</td><td>Manage MCP servers</td></tr>
+    <tr><td>/pr</td><td>Operate on pull requests</td></tr>
+    <tr><td>/review</td><td>AI code review</td></tr>
+    <tr><td>/delegate</td><td>Send to cloud agent</td></tr>
+    <tr><td>Shift+Tab</td><td>Cycle modes</td></tr>
+    <tr><td>Ctrl+T</td><td>Toggle reasoning</td></tr>
+    <tr><td>@file</td><td>Include file in prompt</td></tr>
+    <tr><td>!</td><td>Run shell command</td></tr>
+    <tr><td>Esc</td><td>Cancel operation</td></tr>
+    <tr><td>--continue</td><td>Resume last session</td></tr>
+  </table>
+</div>
+
+</div><!-- /grid -->
+
+</div><!-- /page -->
+</body>
+</html>

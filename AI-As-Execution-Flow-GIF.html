@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flow Diagram GIF Generator</title>
+<style>
+  body {
+    margin: 0;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    font-family: -apple-system, sans-serif;
+    color: #ccc;
+  }
+  .controls {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  button {
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  #genBtn {
+    background: linear-gradient(135deg, #7c72ff, #2ea44f);
+    color: #fff;
+  }
+  #genBtn:disabled { opacity: 0.5; cursor: wait; }
+  #status { font-size: 14px; color: #8b949e; }
+  canvas { border-radius: 8px; }
+  #preview { margin-top: 1rem; }
+  #preview img { border-radius: 8px; max-width: 100%; }
+  a.dl { display: none; padding: 10px 24px; border-radius: 8px; background: #58a6ff; color: #fff; font-weight: 700; text-decoration: none; font-size: 15px; margin-top: 0.75rem; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button id="genBtn" onclick="generateGIF()">Generate GIF</button>
+  <span id="status">Click to generate animated flow diagram GIF</span>
+</div>
+<canvas id="c" width="1080" height="1080"></canvas>
+<div id="preview"></div>
+<a class="dl" id="dlLink">Download GIF</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+<script>
+const W = 1080, H = 1080;
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// Colors
+const C = {
+  bg: '#0d1117', surface: '#161b22', border: '#30363d',
+  text: '#e6edf3', muted: '#8b949e', dim: '#484f58',
+  blue: '#58a6ff', green: '#3fb950', purple: '#bc8cff',
+  cyan: '#76e3ea', orange: '#f0883e', pink: '#f778ba',
+};
+
+// Helpers
+function roundRect(x, y, w, h, r, fill, stroke, lineW) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lineW || 2; ctx.stroke(); }
+}
+
+function pill(x, y, w, h, fill, stroke) {
+  roundRect(x, y, w, h, h / 2, fill, stroke, 2);
+}
+
+function drawText(text, x, y, size, color, weight, align, maxW) {
+  ctx.fillStyle = color || C.text;
+  ctx.font = `${weight || '600'} ${size}px Inter, -apple-system, sans-serif`;
+  ctx.textAlign = align || 'center';
+  ctx.textBaseline = 'middle';
+  if (maxW) ctx.fillText(text, x, y, maxW);
+  else ctx.fillText(text, x, y);
+}
+
+function arrow(x1, y1, x2, y2, color, progress) {
+  const px = x1 + (x2 - x1) * progress;
+  const py = y1 + (y2 - y1) * progress;
+  
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(px, py);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  
+  // Arrowhead
+  if (progress > 0.9) {
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const hl = 14;
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px - hl * Math.cos(angle - 0.4), py - hl * Math.sin(angle - 0.4));
+    ctx.moveTo(px, py);
+    ctx.lineTo(px - hl * Math.cos(angle + 0.4), py - hl * Math.sin(angle + 0.4));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+  
+  // Glow dot
+  if (progress < 1) {
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(px, py, 10, 0, Math.PI * 2);
+    ctx.fillStyle = color.replace(')', ',0.25)').replace('rgb', 'rgba');
+    ctx.fill();
+  }
+}
+
+function drawGlow(x, y, w, h, color, alpha) {
+  const grad = ctx.createRadialGradient(x + w/2, y + h/2, 0, x + w/2, y + h/2, Math.max(w, h));
+  grad.addColorStop(0, color.replace(')', `,${alpha})`).replace('rgb', 'rgba'));
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(x - 40, y - 40, w + 80, h + 80);
+}
+
+// ---- SCENE ELEMENTS ----
+
+const nodes = {
+  title:   { x: 540, y: 48, label: '' },
+  oldWay:  { x: 230, y: 168, w: 280, h: 64, label: 'Text In → Text Out', color: C.orange },
+  shift:   { x: 540, y: 168, w: 80,  label: '→' },
+  newWay:  { x: 850, y: 168, w: 340, h: 64, label: 'Intent In → Execution Out', color: C.green },
+
+  sdk:     { x: 540, y: 310, w: 320, h: 72, label: 'GitHub Copilot SDK', color: C.blue },
+
+  p1:      { x: 175, y: 460, w: 280, h: 54, label: '① Delegate to Agents', color: C.purple },
+  p2:      { x: 540, y: 460, w: 280, h: 54, label: '② Structured Context', color: C.cyan },
+  p3:      { x: 905, y: 460, w: 280, h: 54, label: '③ Beyond the IDE', color: C.green },
+
+  // P1 items
+  p1a: { x: 175, y: 540, w: 244, h: 40, label: '🔍 Explore repo',         color: C.purple },
+  p1b: { x: 175, y: 588, w: 244, h: 40, label: '📋 Plan steps',           color: C.purple },
+  p1c: { x: 175, y: 636, w: 244, h: 40, label: '📝 Modify & run',         color: C.purple },
+  p1d: { x: 175, y: 684, w: 244, h: 40, label: '🔄 Adapt on failure',     color: C.purple },
+  p1e: { x: 175, y: 732, w: 244, h: 40, label: '🛡️ Stay in boundaries',   color: C.purple },
+
+  // P2 items
+  p2a: { x: 540, y: 540, w: 244, h: 40, label: '🔧 Domain tools',         color: C.cyan },
+  p2b: { x: 540, y: 588, w: 244, h: 40, label: '🔗 MCP protocol',         color: C.cyan },
+  p2c: { x: 540, y: 636, w: 244, h: 40, label: '📊 Runtime queries',      color: C.cyan },
+  p2d: { x: 540, y: 684, w: 244, h: 40, label: '🔒 Safety constraints',   color: C.cyan },
+
+  // P3 items
+  p3a: { x: 905, y: 540, w: 244, h: 40, label: '🖥️ Desktop apps',         color: C.green },
+  p3b: { x: 905, y: 588, w: 244, h: 40, label: '⚙️ Internal tools',       color: C.green },
+  p3c: { x: 905, y: 636, w: 244, h: 40, label: '🔄 Background svc',       color: C.green },
+  p3d: { x: 905, y: 684, w: 244, h: 40, label: '☁️ SaaS platforms',       color: C.green },
+  p3e: { x: 905, y: 732, w: 244, h: 40, label: '⚡ Event systems',         color: C.green },
+
+  // Converge
+  converge: { x: 540, y: 830, w: 440, h: 60, label: 'Agentic Execution', color: C.green },
+  tagline:  { x: 540, y: 910, label: 'Constrained · Observable · Adaptive' },
+  
+  quote:    { x: 540, y: 990, w: 720, h: 64, label: '"If your app can trigger logic, it can trigger agentic execution."', color: C.blue },
+};
+
+// Animation timeline: [startFrame, duration, elements]
+// Total ~180 frames (6 seconds @ 30fps → we'll do 60 frames at 10fps for smaller GIF)
+const TOTAL_FRAMES = 80;
+const FPS = 12;
+
+function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+function nodeAlpha(frame, appearAt, dur) {
+  if (frame < appearAt) return 0;
+  if (frame >= appearAt + dur) return 1;
+  return ease((frame - appearAt) / dur);
+}
+
+function drawNode(n, alpha) {
+  if (alpha <= 0) return;
+  ctx.globalAlpha = alpha;
+  const hw = n.w / 2;
+  if (n.w && n.h) {
+    const bgAlpha = Math.round(alpha * 25).toString(16).padStart(2, '0');
+    roundRect(n.x - hw, n.y - n.h/2, n.w, n.h, 14,
+      n.color + '18',
+      n.color + (Math.round(alpha * 180).toString(16).padStart(2, '0')),
+      2);
+    if (alpha > 0.5) drawGlow(n.x - hw, n.y - n.h/2, n.w, n.h, n.color, alpha * 0.08);
+  }
+  if (n.label) {
+    const fs = n.h ? (n.h > 50 ? 20 : 15) : 18;
+    const fw = n.h > 60 ? '800' : '600';
+    drawText(n.label, n.x, n.y, fs, n.color || C.text, fw);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawArrowAnimated(frame, startF, durF, x1, y1, x2, y2, color) {
+  if (frame < startF) return;
+  const p = Math.min(1, (frame - startF) / durF);
+  ctx.globalAlpha = 1;
+  arrow(x1, y1, x2, y2, color, ease(p));
+}
+
+function drawFrame(frame) {
+  // Background
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Top gradient accent
+  const grd = ctx.createLinearGradient(0, 0, W, 0);
+  grd.addColorStop(0, C.purple); grd.addColorStop(0.5, C.green); grd.addColorStop(1, C.blue);
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, W, 4);
+
+  // Title
+  const ta = nodeAlpha(frame, 0, 8);
+  ctx.globalAlpha = ta;
+  drawText('The Era of "AI as Text" Is Over', 540, 56, 34, C.text, '900');
+  drawText('Execution Is the New Interface', 540, 96, 28, C.blue, '700');
+  ctx.globalAlpha = 1;
+
+  // Old Way / New Way
+  const oa = nodeAlpha(frame, 5, 8);
+  drawNode({ ...nodes.oldWay }, oa);
+  drawNode({ ...nodes.newWay }, oa);
+  // Shift arrow
+  if (oa > 0) {
+    ctx.globalAlpha = oa;
+    drawText('»', 540, 168, 36, C.dim, '300');
+    ctx.globalAlpha = 1;
+  }
+
+  // Arrow: shift → SDK
+  drawArrowAnimated(frame, 12, 6, 540, 205, 540, 270, C.blue);
+
+  // SDK box
+  const sa = nodeAlpha(frame, 16, 8);
+  drawNode(nodes.sdk, sa);
+
+  // Arrows: SDK → 3 patterns
+  drawArrowAnimated(frame, 22, 6, 380, 346, 175, 430, C.purple);
+  drawArrowAnimated(frame, 22, 6, 540, 346, 540, 430, C.cyan);
+  drawArrowAnimated(frame, 22, 6, 700, 346, 905, 430, C.green);
+
+  // Pattern headers
+  const pa = nodeAlpha(frame, 26, 6);
+  drawNode(nodes.p1, pa);
+  drawNode(nodes.p2, pa);
+  drawNode(nodes.p3, pa);
+
+  // Pattern items — stagger
+  const items = [
+    [nodes.p1a, nodes.p1b, nodes.p1c, nodes.p1d, nodes.p1e],
+    [nodes.p2a, nodes.p2b, nodes.p2c, nodes.p2d],
+    [nodes.p3a, nodes.p3b, nodes.p3c, nodes.p3d, nodes.p3e],
+  ];
+
+  items.forEach((col) => {
+    col.forEach((item, i) => {
+      const ia = nodeAlpha(frame, 30 + i * 3, 5);
+      drawNode(item, ia);
+    });
+  });
+
+  // Converge arrows
+  drawArrowAnimated(frame, 48, 6, 175, 755, 400, 800, C.purple);
+  drawArrowAnimated(frame, 48, 6, 540, 710, 540, 800, C.cyan);
+  drawArrowAnimated(frame, 48, 6, 905, 755, 680, 800, C.green);
+
+  // Result box
+  const ca = nodeAlpha(frame, 54, 8);
+  if (ca > 0) {
+    ctx.globalAlpha = ca;
+    drawGlow(540 - 220, 800, 440, 60, C.green, 0.15 * ca);
+    roundRect(540 - 220, 800, 440, 60, 16, 'rgba(63,185,80,0.08)', C.green, 2.5);
+    drawText('⚡ Agentic Execution', 540, 830, 24, C.green, '800');
+    ctx.globalAlpha = 1;
+  }
+
+  // Tags
+  const tga = nodeAlpha(frame, 58, 6);
+  ctx.globalAlpha = tga;
+  drawText('Constrained  ·  Observable  ·  Adaptive', 540, 886, 17, C.muted, '500');
+  ctx.globalAlpha = 1;
+
+  // Quote
+  const qa = nodeAlpha(frame, 62, 8);
+  if (qa > 0) {
+    ctx.globalAlpha = qa;
+    roundRect(540 - 380, 930, 760, 64, 14, 'rgba(88,166,255,0.06)', 'rgba(88,166,255,0.25)', 1.5);
+    drawText('"If your app can trigger logic, it can trigger agentic execution."', 540, 962, 17, C.blue, '600');
+    ctx.globalAlpha = 1;
+  }
+
+  // Footer
+  const fa = nodeAlpha(frame, 66, 6);
+  ctx.globalAlpha = fa;
+  drawText('github.blog  ·  Gwen Davis  ·  March 2026  ·  GitHub Copilot SDK', 540, 1040, 14, C.dim, '500');
+  ctx.globalAlpha = 1;
+}
+
+// Preview animation
+let animFrame = 0;
+let animRunning = true;
+function animate() {
+  drawFrame(animFrame);
+  animFrame = (animFrame + 1) % (TOTAL_FRAMES + 20); // hold last frame
+  if (animFrame > TOTAL_FRAMES) animFrame = Math.min(animFrame, TOTAL_FRAMES);
+  if (animRunning) setTimeout(() => requestAnimationFrame(animate), 1000 / FPS);
+}
+animate();
+
+// GIF generation
+function generateGIF() {
+  const btn = document.getElementById('genBtn');
+  const status = document.getElementById('status');
+  btn.disabled = true;
+  status.textContent = 'Generating GIF... (this may take 15-30 seconds)';
+
+  const gif = new GIF({
+    workers: 2,
+    quality: 8,
+    width: W,
+    height: H,
+    workerScript: 'https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js'
+  });
+
+  // Render all frames
+  for (let f = 0; f <= TOTAL_FRAMES; f++) {
+    drawFrame(f);
+    gif.addFrame(ctx, { copy: true, delay: Math.round(1000 / FPS) });
+  }
+  // Hold last frame for 3 seconds
+  drawFrame(TOTAL_FRAMES);
+  gif.addFrame(ctx, { copy: true, delay: 3000 });
+
+  gif.on('progress', (p) => {
+    status.textContent = `Encoding GIF... ${Math.round(p * 100)}%`;
+  });
+
+  gif.on('finished', (blob) => {
+    const url = URL.createObjectURL(blob);
+    const preview = document.getElementById('preview');
+    preview.innerHTML = `<img src="${url}" alt="Flow Diagram GIF">`;
+    const dl = document.getElementById('dlLink');
+    dl.href = url;
+    dl.download = 'AI-As-Execution-Flow-Diagram.gif';
+    dl.style.display = 'inline-block';
+    btn.disabled = false;
+    status.textContent = `GIF ready! (${(blob.size / 1024 / 1024).toFixed(1)} MB)`;
+  });
+
+  gif.render();
+}
+</script>
+</body>
+</html>

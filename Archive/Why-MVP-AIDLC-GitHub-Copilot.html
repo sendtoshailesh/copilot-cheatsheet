@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI + MVP = The Only Way to Ship — GitHub Copilot AIDLC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .infographic {
+    width: 1500px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    position: relative;
+  }
+
+  /* Circuit-line top border */
+  .infographic::before {
+    content: '';
+    display: block;
+    height: 6px;
+    background: linear-gradient(90deg, #0969da, #1f883d, #0969da, #8250df, #0969da);
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 28px 20px 18px;
+    background: linear-gradient(135deg, #f6f8fa 0%, #eaeef2 100%);
+    border-bottom: 2px solid #d0d7de;
+    position: relative;
+  }
+
+  .header h1 {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #1b1f24;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .header h1 .highlight {
+    color: #0969da;
+  }
+
+  .header .subtitle {
+    font-size: 0.85rem;
+    color: #57606a;
+    margin-top: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* Three columns */
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+
+  .panel {
+    padding: 28px 24px 24px;
+    border-right: 2px solid #d0d7de;
+    position: relative;
+  }
+
+  .panel:last-child { border-right: none; }
+
+  .panel-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Panel 1: Why */
+  .panel-why { background: #f6f8fa; }
+  .panel-why .panel-title { color: #1b1f24; }
+
+  /* Panel 2: How */
+  .panel-how { background: #ffffff; }
+  .panel-how .panel-title { color: #0969da; }
+
+  /* Panel 3: Mistakes */
+  .panel-mistakes { background: #fff8f0; }
+  .panel-mistakes .panel-title { color: #bc4c00; }
+
+  /* --- WHY PANEL SECTIONS --- */
+  .why-section {
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed #d0d7de;
+  }
+  .why-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .why-section h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1b1f24;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+
+  .why-visual {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .icon-box.blue { background: #ddf4ff; }
+  .icon-box.green { background: #dafbe1; }
+  .icon-box.gray { background: #eaeef2; }
+  .icon-box.orange { background: #fff1e5; }
+
+  .arrow {
+    font-size: 1.4rem;
+    color: #0969da;
+    font-weight: 700;
+  }
+
+  .why-labels {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+  }
+
+  .why-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #57606a;
+    text-transform: uppercase;
+    text-align: center;
+    flex: 1;
+  }
+
+  .why-footer {
+    font-size: 0.72rem;
+    color: #57606a;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid #d0d7de;
+  }
+
+  /* --- HOW PANEL --- */
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #0969da;
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-content h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1b1f24;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .step-content p {
+    font-size: 0.78rem;
+    color: #57606a;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .step-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+
+  /* Copilot agent box */
+  .copilot-agent-box {
+    background: linear-gradient(135deg, #ddf4ff 0%, #dafbe1 100%);
+    border: 2px solid #0969da;
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+    margin: 16px 0;
+    position: relative;
+  }
+
+  .copilot-agent-box .agent-icon {
+    font-size: 2.8rem;
+    margin-bottom: 6px;
+  }
+
+  .copilot-agent-box h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0969da;
+    text-transform: uppercase;
+  }
+
+  .copilot-agent-box .agent-name {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #1b1f24;
+    margin: 4px 0 2px;
+  }
+
+  .copilot-agent-box .agent-sub {
+    font-size: 0.78rem;
+    color: #57606a;
+    font-weight: 600;
+  }
+
+  .copilot-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .copilot-feature {
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #1b1f24;
+    text-align: center;
+    border: 1px solid #d0d7de;
+  }
+
+  .copilot-feature .feat-icon {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Cycle arrow area */
+  .cycle-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 14px 0 6px;
+    padding: 14px;
+    background: #f6f8fa;
+    border-radius: 12px;
+  }
+
+  .cycle-step {
+    text-align: center;
+  }
+
+  .cycle-step .cycle-icon {
+    font-size: 1.8rem;
+  }
+
+  .cycle-step p {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #1b1f24;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .cycle-arrow {
+    font-size: 1.6rem;
+    color: #1f883d;
+  }
+
+  .how-footer {
+    font-size: 0.72rem;
+    color: #57606a;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #d0d7de;
+  }
+
+  /* --- MISTAKES PANEL --- */
+  .mistake {
+    margin-bottom: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px dashed #ffcf9e;
+  }
+  .mistake:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .mistake-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .mistake-header .warn-icon {
+    font-size: 1.2rem;
+  }
+
+  .mistake-header h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #bc4c00;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mistake-visual {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mistake-box {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ffcf9e;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .mistake-box .m-icon {
+    font-size: 1.8rem;
+  }
+
+  .mistake-box p {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #57606a;
+    text-transform: uppercase;
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .mistake-arrow {
+    font-size: 1.2rem;
+    color: #bc4c00;
+  }
+
+  .mistake-note {
+    font-size: 0.68rem;
+    color: #57606a;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  /* Paradigm callout */
+  .paradigm-callout {
+    background: linear-gradient(135deg, #0969da 0%, #8250df 100%);
+    color: #fff;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  .paradigm-callout .big { font-size: 1rem; display: block; margin-bottom: 4px; }
+
+  /* AI tag pill */
+  .ai-tag {
+    display: inline-block;
+    background: #0969da;
+    color: #fff;
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  .ai-tag.green { background: #1a7f37; }
+  .ai-tag.purple { background: #8250df; }
+  .ai-tag.orange { background: #bc4c00; }
+
+  /* Equation row */
+  .equation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 10px;
+    background: #f6f8fa;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    border: 1px solid #d0d7de;
+  }
+
+  .eq-box {
+    background: #fff;
+    border: 2px solid #0969da;
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: #1b1f24;
+    text-transform: uppercase;
+  }
+
+  .eq-box.result {
+    background: linear-gradient(135deg, #ddf4ff, #dafbe1);
+    border-color: #1f883d;
+    color: #1a7f37;
+  }
+
+  .eq-op {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #8250df;
+  }
+
+  /* Insight box */
+  .insight-box {
+    background: #f6f8fa;
+    border-left: 4px solid #8250df;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #57606a;
+    line-height: 1.5;
+  }
+
+  .insight-box strong { color: #1b1f24; }
+
+  /* AI-native cycle */
+  .ai-cycle-label {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #8250df;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  /* Footer */
+  .footer {
+    background: #1b1f24;
+    color: #ffffff;
+    text-align: center;
+    padding: 16px 20px;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .footer .copilot-text { color: #58a6ff; }
+  .footer .sep { color: #484f58; margin: 0 6px; }
+
+  /* Print / screenshot friendly */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .infographic { box-shadow: none; border-radius: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="infographic">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>AI + MVP = <span class="highlight">The Only Way to Ship</span></h1>
+    <div class="subtitle">Why AI Agents Make MVP-First Development Unavoidable &bull; Powered by GitHub Copilot</div>
+  </div>
+
+  <!-- Three Panels -->
+  <div class="panels">
+
+    <!-- ======================== PANEL 1: WHY AI MAKES MVP UNAVOIDABLE ======================== -->
+    <div class="panel panel-why">
+      <div class="panel-title">Why AI Makes MVP Unavoidable</div>
+
+      <div class="paradigm-callout">
+        <span class="big">The Paradigm Shift</span>
+        AI agents write code in minutes. The bottleneck is no longer <em>building</em> — it's knowing <em>what</em> to build. MVP thinking solves that.
+      </div>
+
+      <!-- AI zeroes out prototype cost -->
+      <div class="why-section">
+        <h3>⚡ Near-Zero Prototype Cost <span class="ai-tag">AI-Native</span></h3>
+        <div class="why-visual">
+          <div class="icon-box blue">🤖</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box blue">⚙️</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box green">🚀</div>
+        </div>
+        <div class="why-labels">
+          <span class="why-label">Agent Generates Code</span>
+          <span class="why-label">Minutes, Not Sprints</span>
+          <span class="why-label">Deploy &amp; Learn</span>
+        </div>
+        <div class="insight-box">When a working prototype costs you a <strong>one-line prompt</strong>, there's no excuse to skip validation.</div>
+      </div>
+
+      <!-- Focused prompts = better AI output -->
+      <div class="why-section">
+        <h3>🎯 MVP Scope = Better AI Output <span class="ai-tag green">Prompt Fit</span></h3>
+        <div class="why-visual">
+          <div class="icon-box green">📋</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box green">🧠</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box blue">✅</div>
+        </div>
+        <div class="why-labels">
+          <span class="why-label">Tight Spec</span>
+          <span class="why-label">Agent Stays Focused</span>
+          <span class="why-label">Higher Quality Code</span>
+        </div>
+        <div class="insight-box">AI agents perform best with <strong>bounded, well-defined tasks</strong>. MVP discipline IS good prompt engineering.</div>
+      </div>
+
+      <!-- AI amplifies bad bets -->
+      <div class="why-section">
+        <h3>⚠️ AI Amplifies Wrong Bets <span class="ai-tag orange">Risk</span></h3>
+        <div class="why-visual">
+          <div class="icon-box orange">🏎️</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box orange">❌</div>
+          <span class="arrow">➡</span>
+          <div class="icon-box orange">💸</div>
+        </div>
+        <div class="why-labels">
+          <span class="why-label">AI Builds Fast</span>
+          <span class="why-label">Wrong Direction Faster</span>
+          <span class="why-label">Wasted at Scale</span>
+        </div>
+        <div class="insight-box">Without MVP validation, AI helps you <strong>build the wrong thing at record speed</strong>.</div>
+      </div>
+
+      <div class="why-footer">AI changed the cost of building.<br>MVP ensures you build what matters.</div>
+    </div>
+
+    <!-- ======================== PANEL 2: THE AI-NATIVE BUILD LOOP ======================== -->
+    <div class="panel panel-how">
+      <div class="panel-title">The AI-Native Build Loop</div>
+
+      <!-- Equation -->
+      <div class="equation">
+        <div class="eq-box">Focused<br>Spec</div>
+        <span class="eq-op">+</span>
+        <div class="eq-box">AI<br>Agent</div>
+        <span class="eq-op">=</span>
+        <div class="eq-box result">Validated<br>MVP</div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Prompt-Ready Spec <span class="ai-tag purple">Human + AI</span></h3>
+          <p>Define core intent &bull; Write an agent-friendly prompt or spec file</p>
+        </div>
+        <div class="step-icon">📋</div>
+      </div>
+
+      <!-- Step 2: Copilot Agent -->
+      <div class="copilot-agent-box">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+          <div class="step-number">2</div>
+          <h3>AI Agent Generates</h3>
+        </div>
+        <div class="agent-icon">🤖</div>
+        <div class="agent-name">GitHub Copilot</div>
+        <div class="agent-sub">Agent Mode &bull; End-to-End Scaffold in One Pass</div>
+        <div class="copilot-features">
+          <div class="copilot-feature"><span class="feat-icon">🤖</span>Agent Mode<br><em style="font-size:0.6rem;color:#57606a">Full-stack gen</em></div>
+          <div class="copilot-feature"><span class="feat-icon">💬</span>Copilot Chat<br><em style="font-size:0.6rem;color:#57606a">Refine in context</em></div>
+          <div class="copilot-feature"><span class="feat-icon">⌨️</span>Inline Completions<br><em style="font-size:0.6rem;color:#57606a">Flow-state edits</em></div>
+          <div class="copilot-feature"><span class="feat-icon">🖥</span>Copilot CLI<br><em style="font-size:0.6rem;color:#57606a">Terminal smarts</em></div>
+        </div>
+      </div>
+
+      <!-- Step 3: Human-in-the-Loop -->
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Human-in-the-Loop Validation <span class="ai-tag green">Signal</span></h3>
+          <p>Ship to real users &bull; Feed learnings back into the next AI prompt</p>
+        </div>
+        <div class="step-icon">🔁</div>
+      </div>
+
+      <div class="ai-cycle-label">⟳ AI-Accelerated Feedback Cycle</div>
+      <div class="cycle-area">
+        <div class="cycle-step">
+          <div class="cycle-icon">📋</div>
+          <p>Spec as<br>Prompt</p>
+        </div>
+        <span class="cycle-arrow">➜</span>
+        <div class="cycle-step">
+          <div class="cycle-icon">🤖</div>
+          <p>Agent<br>Builds</p>
+        </div>
+        <span class="cycle-arrow">➜</span>
+        <div class="cycle-step">
+          <div class="cycle-icon">👥</div>
+          <p>Users<br>Test</p>
+        </div>
+        <span class="cycle-arrow">➜</span>
+        <div class="cycle-step">
+          <div class="cycle-icon">🧠</div>
+          <p>Learn &amp;<br>Re-Prompt</p>
+        </div>
+      </div>
+
+      <div class="how-footer">Each loop takes hours, not sprints.<br>AI makes iteration nearly free.</div>
+    </div>
+
+    <!-- ======================== PANEL 3: AI-ERA PITFALLS ======================== -->
+    <div class="panel panel-mistakes">
+      <div class="panel-title">⚠️ AI-Era Pitfalls ⚠️</div>
+
+      <!-- Prompt Bloat -->
+      <div class="mistake">
+        <div class="mistake-header">
+          <span class="warn-icon">🚫</span>
+          <h3>Prompt Bloat <span class="ai-tag orange">AI Trap</span></h3>
+        </div>
+        <div class="mistake-visual">
+          <div class="mistake-box">
+            <div class="m-icon">📜</div>
+            <p>Overloaded Prompt<br>With 20+ Features</p>
+          </div>
+          <span class="mistake-arrow">➡</span>
+          <div class="mistake-box">
+            <div class="m-icon">💥</div>
+            <p>Fragile, Tangled<br>Generated Code</p>
+          </div>
+        </div>
+        <div class="insight-box">AI agents degrade with vague, sprawling instructions. <strong>Lean spec = clean output.</strong></div>
+      </div>
+
+      <!-- Speed Illusion -->
+      <div class="mistake">
+        <div class="mistake-header">
+          <span class="warn-icon">🚫</span>
+          <h3>Speed Illusion <span class="ai-tag orange">AI Trap</span></h3>
+        </div>
+        <div class="mistake-visual">
+          <div class="mistake-box">
+            <div class="m-icon">🏎️</div>
+            <p>"AI Built It Fast"<br>So Ship Everything</p>
+          </div>
+          <span class="mistake-arrow">➡</span>
+          <div class="mistake-box">
+            <div class="m-icon">🕳️</div>
+            <p>No User Signal<br>Burned Runway</p>
+          </div>
+        </div>
+        <div class="insight-box">Generating fast ≠ validating fast. <strong>Speed without feedback is just velocity toward the wrong target.</strong></div>
+      </div>
+
+      <!-- Over-Delegating to AI -->
+      <div class="mistake">
+        <div class="mistake-header">
+          <span class="warn-icon">🚫</span>
+          <h3>Over-Delegating to AI <span class="ai-tag orange">AI Trap</span></h3>
+        </div>
+        <div class="mistake-visual">
+          <div class="mistake-box">
+            <div class="m-icon">🤖</div>
+            <p>AI Decides<br>What to Build</p>
+          </div>
+          <span class="mistake-arrow">➡</span>
+          <div class="mistake-box">
+            <div class="m-icon">❓</div>
+            <p>No Product<br>Judgment</p>
+          </div>
+        </div>
+        <div class="insight-box">AI is the <strong>how</strong>. Humans own the <strong>what</strong> and <strong>why</strong>. MVP keeps that boundary clear.</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    AI Writes the Code. MVP Ensures It&rsquo;s the Right Code.
+    <span class="sep">|</span>
+    <span class="copilot-text">GitHub Copilot</span> &mdash;
+    Agent Mode &bull; Chat &bull; CLI &bull; Inline Completions
+  </div>
+
+</div>
+
+</body>
+</html>
