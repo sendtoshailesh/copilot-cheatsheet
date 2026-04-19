@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080">
+    <title>How to use GitHub Copilot better than 99% of people</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas:    #0d1117;
+            --bg-card:      #161b22;
+            --bg-inset:     #010409;
+            --border:       #30363d;
+            --border-dim:   #21262d;
+            --fg:           #e6edf3;
+            --fg-muted:     #8b949e;
+            --fg-dim:       #6e7681;
+            --blue:         #58a6ff;
+            --green:        #3fb950;
+            --purple:       #bc8cff;
+            --orange:       #d29922;
+            --red:          #f85149;
+            --pink:         #f778ba;
+            --cyan:         #76e3ea;
+            --coral:        #ea6045;
+            --yellow:       #e3b341;
+            --teal:         #39d353;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            width: 1080px;
+            background: var(--bg-canvas);
+            color: var(--fg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 52px 60px 38px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            height: 600px;
+            background: radial-gradient(ellipse at center,
+                rgba(88,166,255,0.14) 0%,
+                rgba(188,140,255,0.07) 40%,
+                transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-inner { position: relative; z-index: 1; }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 5px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blue);
+            margin-bottom: 18px;
+            letter-spacing: 0.03em;
+        }
+
+        .eyebrow svg { width: 14px; height: 14px; fill: var(--blue); }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 0%, #e6edf3 40%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .sub {
+            font-size: 15px;
+            color: var(--fg-muted);
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+
+        .divider {
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--purple));
+            border-radius: 2px;
+            margin: 0 auto;
+        }
+
+        /* ========== TIPS GRID ========== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            padding: 28px 40px 0;
+        }
+
+        /* ========== CARD ========== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px 18px 16px;
+            position: relative;
+        }
+
+        .card.span-2 {
+            grid-column: span 2;
+        }
+
+        .card.span-3 {
+            grid-column: span 3;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(88,166,255,0.04) 100%);
+            border-color: rgba(88,166,255,0.25);
+            padding: 24px;
+        }
+
+        .card.accent-blue   { border-color: rgba(88,166,255,0.3); }
+        .card.accent-green  { border-color: rgba(63,185,80,0.3); }
+        .card.accent-purple { border-color: rgba(188,140,255,0.3); }
+        .card.accent-red    { border-color: rgba(248,81,73,0.25); }
+
+        .num {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--fg-dim);
+            background: rgba(110,118,129,0.12);
+            border: 1px solid var(--border-dim);
+            border-radius: 999px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card.span-3 .num { top: 16px; right: 18px; }
+
+        .icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .icon.blue   { background: rgba(88,166,255,0.12); }
+        .icon.green  { background: rgba(63,185,80,0.12); }
+        .icon.purple { background: rgba(188,140,255,0.12); }
+        .icon.orange { background: rgba(210,153,34,0.12); }
+        .icon.red    { background: rgba(248,81,73,0.12); }
+        .icon.pink   { background: rgba(247,120,186,0.12); }
+        .icon.cyan   { background: rgba(118,227,234,0.12); }
+        .icon.coral  { background: rgba(234,96,69,0.12); }
+        .icon.yellow { background: rgba(227,179,65,0.12); }
+        .icon.teal   { background: rgba(57,211,83,0.12); }
+
+        .tag {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 2px 7px;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .tag-ide      { background: rgba(88,166,255,0.15);  color: var(--blue); }
+        .tag-config   { background: rgba(210,153,34,0.15);  color: var(--orange); }
+        .tag-workflow  { background: rgba(63,185,80,0.15);   color: var(--green); }
+        .tag-cloud    { background: rgba(188,140,255,0.15); color: var(--purple); }
+        .tag-cli      { background: rgba(118,227,234,0.15); color: var(--cyan); }
+        .tag-new      { background: rgba(248,81,73,0.15);   color: var(--red); }
+        .tag-review   { background: rgba(247,120,186,0.15); color: var(--pink); }
+        .tag-sdk      { background: rgba(57,211,83,0.15);   color: var(--teal); }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--fg);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .card p, .card-desc {
+            font-size: 12px;
+            color: var(--fg-muted);
+            line-height: 1.55;
+            margin-bottom: 8px;
+        }
+
+        .bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullets li {
+            font-size: 11.5px;
+            color: var(--fg-muted);
+            line-height: 1.55;
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 3px;
+        }
+
+        .bullets li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+        }
+
+        .bullets li.bl::before { background: var(--blue); }
+        .bullets li.gr::before { background: var(--green); }
+        .bullets li.pu::before { background: var(--purple); }
+        .bullets li.or::before { background: var(--orange); }
+        .bullets li.cy::before { background: var(--cyan); }
+        .bullets li.rd::before { background: var(--red); }
+        .bullets li.pk::before { background: var(--pink); }
+        .bullets li.tl::before { background: var(--teal); }
+
+        .mono {
+            background: var(--bg-inset);
+            border: 1px solid var(--border-dim);
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+            font-size: 10.5px;
+            color: var(--blue);
+            margin-top: 6px;
+            line-height: 1.6;
+        }
+
+        .tagline {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-dim);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--fg-dim);
+            font-style: italic;
+        }
+
+        /* Featured terminal mockup */
+        .terminal {
+            background: var(--bg-inset);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+            font-size: 11px;
+            line-height: 1.8;
+            color: var(--fg-muted);
+        }
+
+        .terminal .cm { color: var(--fg-dim); font-style: italic; }
+        .terminal .str { color: var(--blue); }
+        .terminal .ok { color: var(--green); }
+        .terminal .dim { color: var(--fg-dim); }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px 28px;
+            margin-top: 16px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-left svg { width: 20px; height: 20px; fill: var(--fg-dim); }
+        .footer-left span { font-size: 11px; color: var(--fg-dim); }
+
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-tag {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--fg-dim);
+            background: rgba(110,118,129,0.1);
+            border: 1px solid var(--border-dim);
+            border-radius: 999px;
+            padding: 3px 10px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 7px 18px;
+            background: var(--green);
+            color: var(--bg-canvas);
+            font-weight: 700;
+            font-size: 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            letter-spacing: 0.01em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="eyebrow">
+            <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub Copilot · Expert Tips · 2026
+        </div>
+        <h1>How to use GitHub Copilot<br>better than 99% of people</h1>
+        <p class="sub">12 tips based on the latest features — Agent Mode, Cloud Agent,<br>MCP Servers, Copilot SDK, and more.</p>
+        <div class="divider"></div>
+    </div>
+</section>
+
+<!-- GRID -->
+<div class="grid">
+
+    <!-- 01 FEATURED -->
+    <div class="card span-3 accent-blue">
+        <div>
+            <span class="num">01</span>
+            <div class="icon blue">⚡</div>
+            <span class="tag tag-ide">IDE · AGENT MODE</span>
+            <h3>Switch to Agent Mode — stop using plain chat</h3>
+            <p class="card-desc">Agent mode edits files, runs terminal commands, installs packages, and fixes errors in a loop — autonomously.</p>
+            <ul class="bullets">
+                <li class="bl">Open Copilot Chat → switch dropdown to <strong>Agent</strong></li>
+                <li class="bl">Describe <em>what</em> you want, not <em>how</em> to build it</li>
+                <li class="bl">Copilot creates files, runs tests, fixes failures</li>
+            </ul>
+            <div class="tagline">"Chat answers questions. Agent ships features."</div>
+        </div>
+        <div class="terminal">
+            <span class="cm">// You type one prompt:</span><br>
+            <span class="dim">&gt;</span> <span class="str">"Add a /health endpoint with tests</span><br>
+            <span class="str">&nbsp;&nbsp;and update the README"</span><br><br>
+            <span class="cm">// Agent executes:</span><br>
+            <span class="ok">✓</span> <span class="dim">Created</span> src/routes/health.ts<br>
+            <span class="ok">✓</span> <span class="dim">Created</span> tests/health.test.ts<br>
+            <span class="ok">✓</span> <span class="dim">Updated</span> README.md<br>
+            <span class="ok">✓</span> <span class="dim">Ran</span> npm test <span class="ok">— 3 passed</span>
+        </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="card accent-green">
+        <span class="num">02</span>
+        <div class="icon green">🤖</div>
+        <span class="tag tag-cloud">CLOUD AGENT</span>
+        <h3>Assign issues directly to Copilot</h3>
+        <p class="card-desc">Cloud Agent runs on GitHub — no IDE needed. Assign an issue and it plans, codes, and opens a PR.</p>
+        <ul class="bullets">
+            <li class="gr">Issue → Assignees → <strong>Copilot</strong></li>
+            <li class="gr">Also try Claude or Codex agents</li>
+            <li class="gr">Agent signs its commits & runs CI</li>
+        </ul>
+        <div class="tagline">"Your backlog has an AI teammate."</div>
+    </div>
+
+    <!-- 03 -->
+    <div class="card">
+        <span class="num">03</span>
+        <div class="icon orange">📋</div>
+        <span class="tag tag-config">CONFIG</span>
+        <h3>Add custom instructions — once</h3>
+        <p class="card-desc">Create <code>.github/copilot-instructions.md</code>. Your rules apply every session, automatically.</p>
+        <ul class="bullets">
+            <li class="or">Define language & framework conventions</li>
+            <li class="or">Set testing & style rules</li>
+            <li class="or">Org-level instructions now GA</li>
+        </ul>
+        <div class="tagline">"Write rules once. Applied forever."</div>
+    </div>
+
+    <!-- 04 -->
+    <div class="card accent-purple">
+        <span class="num">04</span>
+        <div class="icon purple">🧠</div>
+        <span class="tag tag-ide">MODEL SELECTION</span>
+        <h3>Pick the right model for the task</h3>
+        <p class="card-desc">Claude Opus 4.7 for deep refactors. GPT-5.4 mini for fast, unlimited chats. Match model to complexity.</p>
+        <ul class="bullets">
+            <li class="pu"><strong>Opus 4.7</strong> — complex multi-file work</li>
+            <li class="pu"><strong>GPT-5.4 mini</strong> — quick unlimited chats</li>
+            <li class="pu"><strong>Gemini / Codex</strong> — alternative strengths</li>
+        </ul>
+        <div class="tagline">"Best model ≠ biggest model."</div>
+    </div>
+
+    <!-- 05 -->
+    <div class="card">
+        <span class="num">05</span>
+        <div class="icon cyan">📁</div>
+        <span class="tag tag-config">PROMPT FILES</span>
+        <h3>Create reusable prompt files</h3>
+        <p class="card-desc">Store prompts in <code>.github/prompts/</code> and invoke with <strong>/</strong> slash command. Share across your team.</p>
+        <div class="mono">.github/prompts/code-review.md<br>.github/prompts/add-tests.md</div>
+        <div class="tagline">"One great prompt > 50 random asks."</div>
+    </div>
+
+    <!-- 06 -->
+    <div class="card">
+        <span class="num">06</span>
+        <div class="icon pink">🔌</div>
+        <span class="tag tag-workflow">MCP SERVERS</span>
+        <h3>Connect external tools via MCP</h3>
+        <p class="card-desc">Databases, Docker, Azure, 50+ integrations. Copilot reads your full tool ecosystem mid-conversation.</p>
+        <ul class="bullets">
+            <li class="gr">Configure in <code>.vscode/mcp.json</code></li>
+            <li class="gr">Browse <strong>github.com/mcp</strong> registry</li>
+            <li class="gr">Org admins manage MCP allow-lists</li>
+        </ul>
+        <div class="tagline">"Copilot becomes infrastructure."</div>
+    </div>
+
+    <!-- 07 -->
+    <div class="card">
+        <span class="num">07</span>
+        <div class="icon coral">🖥️</div>
+        <span class="tag tag-cli">CLI</span>
+        <h3>Copilot CLI — natural language terminal</h3>
+        <p class="card-desc"><code>gh copilot</code> turns plain English into shell commands. Now supports BYOK and local models.</p>
+        <ul class="bullets">
+            <li class="cy">Ask in English, get the exact command</li>
+            <li class="cy">BYOK + local models (April 2026)</li>
+            <li class="cy">Works on GitHub Mobile too</li>
+        </ul>
+        <div class="tagline">"Stop Googling terminal commands."</div>
+    </div>
+
+    <!-- 08 -->
+    <div class="card span-2">
+        <span class="num">08</span>
+        <div class="icon yellow">🔍</div>
+        <span class="tag tag-ide">IDE SHORTCUTS</span>
+        <h3>Master @workspace, @terminal, and slash commands</h3>
+        <p class="card-desc">Give Copilot full repo context with <code>@workspace</code>. Use <code>@terminal</code> for CLI help. Fire off <code>/fix</code>, <code>/explain</code>, <code>/tests</code>, <code>/doc</code> for instant actions without typing paragraphs.</p>
+        <div class="mono" style="display:flex;gap:16px;flex-wrap:wrap;">
+            <span>@workspace "how does auth work?"</span>
+            <span>/fix → auto-fixes selection</span>
+            <span>/tests → generates tests</span>
+        </div>
+        <div class="tagline">"Shortcuts beat paragraphs. Every time."</div>
+    </div>
+
+    <!-- 09 -->
+    <div class="card accent-red">
+        <span class="num">09</span>
+        <div class="icon red">📝</div>
+        <span class="tag tag-review">CODE REVIEW</span>
+        <h3>Copilot reviews your PRs</h3>
+        <p class="card-desc">Catches bugs, security issues & style violations before human reviewers look.</p>
+        <ul class="bullets">
+            <li class="rd">Enable in repo settings → Copilot</li>
+            <li class="rd">PR merge metrics in usage API</li>
+            <li class="rd">Active/passive review tracking</li>
+        </ul>
+        <div class="tagline">"AI catches what humans miss."</div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+        <span class="num">10</span>
+        <div class="icon teal">🧰</div>
+        <span class="tag tag-sdk">SDK · NEW</span>
+        <h3>Build with the Copilot SDK</h3>
+        <p class="card-desc">Embed Copilot in your own apps and internal tools. Public preview since April 2026.</p>
+        <ul class="bullets">
+            <li class="tl">Custom AI features via Copilot models</li>
+            <li class="tl">Manage agent skills via GitHub CLI</li>
+        </ul>
+        <div class="tagline">"Copilot isn't a tool. It's a platform."</div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+        <span class="num">11</span>
+        <div class="icon orange">🏢</div>
+        <span class="tag tag-config">ENTERPRISE</span>
+        <h3>Governance & data residency</h3>
+        <p class="card-desc">Runner controls, firewall settings, audit logs, and data residency in US + EU. FedRAMP compliant.</p>
+        <ul class="bullets">
+            <li class="or">Org runner controls for Cloud Agent</li>
+            <li class="or">MCP server allow-lists per org</li>
+        </ul>
+        <div class="tagline">"Power without governance is chaos."</div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+        <span class="num">12</span>
+        <div class="icon blue">🔄</div>
+        <span class="tag tag-workflow">BEST PRACTICE</span>
+        <h3>Your repo IS Copilot's brain</h3>
+        <p class="card-desc">Clean structure, solid README, consistent patterns. Use Copilot Spaces to share curated context across teams.</p>
+        <ul class="bullets">
+            <li class="bl">Organize folders logically</li>
+            <li class="bl">Great README = great suggestions</li>
+        </ul>
+        <div class="tagline">"Garbage repo → garbage suggestions."</div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <div class="footer-left">
+        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>Source: GitHub Changelog · April 2026</span>
+    </div>
+    <div class="footer-right">
+        <span class="footer-tag">Pro · Pro+ · Business · Enterprise</span>
+        <a href="https://github.com/features/copilot" class="cta-btn">Get Copilot →</a>
+    </div>
+</div>
+
+</body>
+</html>
