@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Carousel — How to use GitHub Copilot better than 99%</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --slide-w: 1080px;
+    --slide-h: 1350px;
+    --bg:      #0d1117;
+    --surface: #161b22;
+    --inset:   #010409;
+    --border:  #30363d;
+    --border2: #21262d;
+    --fg:      #e6edf3;
+    --muted:   #8b949e;
+    --dim:     #6e7681;
+    --blue:    #58a6ff;
+    --green:   #3fb950;
+    --purple:  #bc8cff;
+    --orange:  #d29922;
+    --red:     #f85149;
+    --pink:    #f778ba;
+    --cyan:    #76e3ea;
+    --coral:   #ea6045;
+    --yellow:  #e3b341;
+    --teal:    #39d353;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .instructions {
+    background: #222;
+    border: 1px solid #444;
+    border-radius: 12px;
+    padding: 1.2rem 2rem;
+    max-width: var(--slide-w);
+    width: 100%;
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .instructions strong { color: #fff; }
+  .instructions code {
+    background: #333;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.85em;
+    color: var(--green);
+  }
+
+  /* ============ SLIDE CONTAINER ============ */
+  .slide {
+    width: var(--slide-w);
+    height: var(--slide-h);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide-inner {
+    width: 100%;
+    height: 100%;
+    padding: 64px 72px 80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--bg);
+  }
+
+  /* ============ TOP BAR ============ */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+    flex-shrink: 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+
+  .brand svg { flex-shrink: 0; }
+
+  .slide-num {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 17px;
+    border: 2px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ============ PROGRESS DOTS ============ */
+  .progress {
+    position: absolute;
+    bottom: 32px;
+    left: 72px;
+    right: 72px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .progress .dot {
+    height: 4px;
+    flex: 1;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .progress .dot.active { background: rgba(255,255,255,0.25); }
+  .progress .dot.current { background: #fff; }
+
+  /* ============ SHARED TYPOGRAPHY ============ */
+  .slide h1 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: var(--fg);
+  }
+
+  .slide h2 {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+    color: var(--fg);
+  }
+
+  .slide p.desc {
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  .tip-num-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  /* ============ BULLETS ============ */
+  .bullets {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+  }
+
+  .bullets li {
+    font-size: 20px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    padding-left: 24px;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .bullets li.bl::before { background: var(--blue); }
+  .bullets li.gr::before { background: var(--green); }
+  .bullets li.pu::before { background: var(--purple); }
+  .bullets li.or::before { background: var(--orange); }
+  .bullets li.cy::before { background: var(--cyan); }
+  .bullets li.rd::before { background: var(--red); }
+  .bullets li.pk::before { background: var(--pink); }
+  .bullets li.tl::before { background: var(--teal); }
+
+  /* ============ TAGLINE ============ */
+  .tagline {
+    margin-top: auto;
+    padding: 20px 24px;
+    border-radius: 12px;
+    border-left: 4px solid;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.02);
+    font-style: italic;
+  }
+
+  /* ============ MONO CODE BOX ============ */
+  .mono-box {
+    background: var(--inset);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 17px;
+    color: var(--blue);
+    margin-top: 16px;
+    line-height: 1.7;
+  }
+
+  /* ============ TERMINAL MOCKUP ============ */
+  .terminal {
+    background: var(--inset);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 17px;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .terminal .cm { color: var(--dim); font-style: italic; }
+  .terminal .str { color: var(--blue); }
+  .terminal .ok { color: var(--green); }
+  .terminal .dm { color: var(--dim); }
+
+  /* ============================================================
+     SLIDE 1: COVER
+     ============================================================ */
+  .s-cover .slide-inner {
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 0%, rgba(88,166,255,0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(188,140,255,0.08), transparent),
+      var(--bg);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .s-cover .top-bar { position: absolute; top: 48px; left: 72px; right: 72px; }
+
+  .s-cover h1 {
+    font-size: 58px;
+    max-width: 820px;
+    background: linear-gradient(135deg, #fff 0%, #e6edf3 40%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 28px;
+  }
+
+  .s-cover p.desc { max-width: 640px; font-size: 22px; margin-bottom: 36px; }
+
+  .cover-divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    border-radius: 2px;
+  }
+
+  .cover-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 28px;
+    letter-spacing: 0.03em;
+  }
+
+  .cover-pill svg { width: 16px; height: 16px; fill: var(--blue); }
+
+  /* ============================================================
+     SLIDE 2: TIP 01 (FEATURED — Agent Mode)
+     ============================================================ */
+  .s-tip01 .slide-inner {
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 20%, rgba(88,166,255,0.1), transparent),
+      var(--bg);
+  }
+
+  .s-tip01 .tag { background: rgba(88,166,255,0.12); color: var(--blue); }
+  .s-tip01 .tip-num-badge { background: rgba(88,166,255,0.12); color: var(--blue); }
+  .s-tip01 .tagline { border-color: var(--blue); }
+
+  .s-tip01 .two-col {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    flex: 1;
+  }
+
+  /* ============================================================
+     TIP SLIDES (02–12) — color variations
+     ============================================================ */
+  .s-tip02 .slide-inner { background: radial-gradient(ellipse 80% 60% at 80% 80%, rgba(63,185,80,0.08), transparent), var(--bg); }
+  .s-tip02 .tag { background: rgba(63,185,80,0.12); color: var(--green); }
+  .s-tip02 .tip-num-badge { background: rgba(63,185,80,0.12); color: var(--green); }
+  .s-tip02 .tagline { border-color: var(--green); }
+
+  .s-tip03 .slide-inner { background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(210,153,34,0.08), transparent), var(--bg); }
+  .s-tip03 .tag { background: rgba(210,153,34,0.12); color: var(--orange); }
+  .s-tip03 .tip-num-badge { background: rgba(210,153,34,0.12); color: var(--orange); }
+  .s-tip03 .tagline { border-color: var(--orange); }
+
+  .s-tip04 .slide-inner { background: radial-gradient(ellipse 70% 60% at 80% 20%, rgba(188,140,255,0.1), transparent), var(--bg); }
+  .s-tip04 .tag { background: rgba(188,140,255,0.12); color: var(--purple); }
+  .s-tip04 .tip-num-badge { background: rgba(188,140,255,0.12); color: var(--purple); }
+  .s-tip04 .tagline { border-color: var(--purple); }
+
+  .s-tip05 .slide-inner { background: radial-gradient(ellipse 70% 60% at 20% 30%, rgba(118,227,234,0.08), transparent), var(--bg); }
+  .s-tip05 .tag { background: rgba(118,227,234,0.12); color: var(--cyan); }
+  .s-tip05 .tip-num-badge { background: rgba(118,227,234,0.12); color: var(--cyan); }
+  .s-tip05 .tagline { border-color: var(--cyan); }
+
+  .s-tip06 .slide-inner { background: radial-gradient(ellipse 80% 60% at 70% 80%, rgba(247,120,186,0.08), transparent), var(--bg); }
+  .s-tip06 .tag { background: rgba(247,120,186,0.12); color: var(--pink); }
+  .s-tip06 .tip-num-badge { background: rgba(247,120,186,0.12); color: var(--pink); }
+  .s-tip06 .tagline { border-color: var(--pink); }
+
+  .s-tip07 .slide-inner { background: radial-gradient(ellipse 80% 60% at 30% 30%, rgba(234,96,69,0.08), transparent), var(--bg); }
+  .s-tip07 .tag { background: rgba(234,96,69,0.12); color: var(--coral); }
+  .s-tip07 .tip-num-badge { background: rgba(234,96,69,0.12); color: var(--coral); }
+  .s-tip07 .tagline { border-color: var(--coral); }
+
+  .s-tip08 .slide-inner { background: radial-gradient(ellipse 80% 60% at 50% 80%, rgba(227,179,65,0.08), transparent), var(--bg); }
+  .s-tip08 .tag { background: rgba(227,179,65,0.12); color: var(--yellow); }
+  .s-tip08 .tip-num-badge { background: rgba(227,179,65,0.12); color: var(--yellow); }
+  .s-tip08 .tagline { border-color: var(--yellow); }
+
+  .s-tip09 .slide-inner { background: radial-gradient(ellipse 80% 60% at 80% 30%, rgba(248,81,73,0.08), transparent), var(--bg); }
+  .s-tip09 .tag { background: rgba(248,81,73,0.12); color: var(--red); }
+  .s-tip09 .tip-num-badge { background: rgba(248,81,73,0.12); color: var(--red); }
+  .s-tip09 .tagline { border-color: var(--red); }
+
+  .s-tip10 .slide-inner { background: radial-gradient(ellipse 80% 60% at 20% 60%, rgba(57,211,83,0.08), transparent), var(--bg); }
+  .s-tip10 .tag { background: rgba(57,211,83,0.12); color: var(--teal); }
+  .s-tip10 .tip-num-badge { background: rgba(57,211,83,0.12); color: var(--teal); }
+  .s-tip10 .tagline { border-color: var(--teal); }
+
+  .s-tip11 .slide-inner { background: radial-gradient(ellipse 80% 60% at 60% 80%, rgba(210,153,34,0.06), transparent), var(--bg); }
+  .s-tip11 .tag { background: rgba(210,153,34,0.12); color: var(--orange); }
+  .s-tip11 .tip-num-badge { background: rgba(210,153,34,0.12); color: var(--orange); }
+  .s-tip11 .tagline { border-color: var(--orange); }
+
+  .s-tip12 .slide-inner { background: radial-gradient(ellipse 80% 60% at 40% 20%, rgba(88,166,255,0.08), transparent), var(--bg); }
+  .s-tip12 .tag { background: rgba(88,166,255,0.12); color: var(--blue); }
+  .s-tip12 .tip-num-badge { background: rgba(88,166,255,0.12); color: var(--blue); }
+  .s-tip12 .tagline { border-color: var(--blue); }
+
+  /* ============================================================
+     SLIDE 14: CTA
+     ============================================================ */
+  .s-cta .slide-inner {
+    background:
+      radial-gradient(ellipse 90% 70% at 50% 100%, rgba(88,166,255,0.12), transparent),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(63,185,80,0.08), transparent),
+      var(--bg);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .s-cta .top-bar { position: absolute; top: 48px; left: 72px; right: 72px; }
+
+  .s-cta h1 {
+    font-size: 50px;
+    max-width: 740px;
+    background: linear-gradient(135deg, var(--green), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 32px;
+  }
+
+  .s-cta p.desc { font-size: 22px; max-width: 600px; margin-bottom: 20px; }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--blue), var(--green));
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .engage-text {
+    font-size: 18px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+
+  .engage-text strong { color: rgba(255,255,255,0.7); }
+
+  .cta-hashtags {
+    font-size: 15px;
+    color: var(--dim);
+    margin-top: 24px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    body { background: var(--bg); padding: 0; gap: 0; margin: 0; }
+    .instructions { display: none; }
+    .slide {
+      page-break-after: always;
+      page-break-inside: avoid;
+      margin: 0;
+    }
+    .slide:last-child { page-break-after: auto; }
+    .slide-inner { background: var(--bg) !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>LinkedIn Carousel — 14 slides, 1080&times;1350px (4:5 portrait)</strong><br>
+  Export with <code>node capture-carousel.js</code> to generate a PDF for LinkedIn document upload. Each slide is optimized for mobile-first viewing.
+</div>
+
+<!-- ============================================================
+     SLIDE 1: COVER
+     ============================================================ -->
+<div class="slide s-cover">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub Copilot
+      </div>
+      <div class="slide-num">1/14</div>
+    </div>
+
+    <div class="cover-pill">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      12 Expert Tips &middot; April 2026
+    </div>
+    <h1>How to use GitHub&nbsp;Copilot better than 99% of&nbsp;people</h1>
+    <p class="desc">Agent Mode, Cloud Agent, MCP Servers, Copilot SDK, and the features most developers don't know exist.</p>
+    <div class="cover-divider"></div>
+
+    <div class="progress">
+      <div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 2: TIP 01 — Agent Mode
+     ============================================================ -->
+<div class="slide s-tip01">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 01
+      </div>
+      <div class="slide-num">2/14</div>
+    </div>
+
+    <div class="tip-num-badge">⚡</div>
+    <span class="tag">IDE &middot; Agent Mode</span>
+    <h2>Switch to Agent Mode &mdash; stop using plain&nbsp;chat</h2>
+    <p class="desc">Agent mode doesn't just suggest code. It edits files, runs terminal commands, installs packages, and fixes errors &mdash; all autonomously in a loop.</p>
+
+    <ul class="bullets">
+      <li class="bl">Open Copilot Chat &rarr; switch dropdown to <strong>Agent</strong></li>
+      <li class="bl">Describe <em>what</em> you want, not <em>how</em> to build it</li>
+      <li class="bl">Creates files, runs tests, fixes failures in a loop</li>
+    </ul>
+
+    <div class="terminal" style="margin-top: 24px;">
+      <span class="cm">// One prompt in Agent mode:</span><br>
+      <span class="dm">&gt;</span> <span class="str">"Add a /health endpoint with tests<br>&nbsp;&nbsp;and update the README"</span><br><br>
+      <span class="cm">// Agent executes:</span><br>
+      <span class="ok">✓</span> <span class="dm">Created</span> src/routes/health.ts<br>
+      <span class="ok">✓</span> <span class="dm">Created</span> tests/health.test.ts<br>
+      <span class="ok">✓</span> <span class="dm">Updated</span> README.md<br>
+      <span class="ok">✓</span> <span class="dm">Ran</span> npm test <span class="ok">&mdash; 3 passed</span>
+    </div>
+
+    <div class="tagline" style="border-color: var(--blue);">
+      &ldquo;Chat answers questions. Agent ships features.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 3: TIP 02 — Cloud Agent
+     ============================================================ -->
+<div class="slide s-tip02">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 02
+      </div>
+      <div class="slide-num">3/14</div>
+    </div>
+
+    <div class="tip-num-badge">🤖</div>
+    <span class="tag">Cloud Agent</span>
+    <h2>Assign issues directly to&nbsp;Copilot</h2>
+    <p class="desc">Copilot Cloud Agent runs in the background on GitHub &mdash; no IDE needed. Assign an issue and it researches, plans, codes, and opens a PR.</p>
+
+    <ul class="bullets">
+      <li class="gr">Open any issue &rarr; Assignees &rarr; select <strong>Copilot</strong></li>
+      <li class="gr">Also try Claude or Codex agents for comparison</li>
+      <li class="gr">Agent signs its commits and runs your CI</li>
+      <li class="gr">Works entirely in the cloud &mdash; zero IDE time</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Your backlog now has an AI teammate.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 4: TIP 03 — Custom Instructions
+     ============================================================ -->
+<div class="slide s-tip03">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 03
+      </div>
+      <div class="slide-num">4/14</div>
+    </div>
+
+    <div class="tip-num-badge">📋</div>
+    <span class="tag">Config</span>
+    <h2>Add custom instructions &mdash;&nbsp;once</h2>
+    <p class="desc">Create a single file in your repo. Every Copilot session reads it automatically &mdash; your coding standards, stack, and preferences applied every&nbsp;time.</p>
+
+    <div class="mono-box">.github/copilot-instructions.md</div>
+
+    <ul class="bullets">
+      <li class="or">Define language, framework, and testing conventions</li>
+      <li class="or">Set rules like &ldquo;always use TypeScript strict mode&rdquo;</li>
+      <li class="or">Org-level instructions now GA (April 2026)</li>
+      <li class="or">Works across IDE, Cloud Agent, and CLI</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Write your rules once. They apply forever.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 5: TIP 04 — Model Selection
+     ============================================================ -->
+<div class="slide s-tip04">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 04
+      </div>
+      <div class="slide-num">5/14</div>
+    </div>
+
+    <div class="tip-num-badge">🧠</div>
+    <span class="tag">Model Selection</span>
+    <h2>Pick the right model for the&nbsp;job</h2>
+    <p class="desc">Click the model picker in VS Code or on GitHub. Match the model to the task &mdash; fast models for quick edits, frontier models for complex architecture.</p>
+
+    <ul class="bullets">
+      <li class="pu"><strong>Claude Opus 4.7</strong> &mdash; deep multi-file refactors, complex architecture</li>
+      <li class="pu"><strong>GPT-5.4 mini</strong> &mdash; fast, cheap, unlimited chats</li>
+      <li class="pu"><strong>Gemini / Codex</strong> &mdash; alternatives with different strengths</li>
+      <li class="pu">Switch models mid-conversation anytime</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;The best model is the one that fits the task.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 6: TIP 05 — Prompt Files
+     ============================================================ -->
+<div class="slide s-tip05">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 05
+      </div>
+      <div class="slide-num">6/14</div>
+    </div>
+
+    <div class="tip-num-badge">📁</div>
+    <span class="tag">Prompt Files</span>
+    <h2>Create reusable prompt&nbsp;files</h2>
+    <p class="desc">Store task-specific prompts as Markdown files. Invoke them with the <strong>/</strong> slash command in chat. Shareable across your entire team.</p>
+
+    <div class="mono-box">.github/prompts/code-review.md<br>.github/prompts/add-tests.md<br>.github/prompts/refactor.md<br>.github/prompts/deploy-checklist.md</div>
+
+    <ul class="bullets">
+      <li class="cy">One file per workflow: review, deploy, migrate, document</li>
+      <li class="cy">Include variables, constraints, and output format</li>
+      <li class="cy">Team members use the same prompts for consistency</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;One great prompt file &gt; 50 random asks.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 7: TIP 06 — MCP Servers
+     ============================================================ -->
+<div class="slide s-tip06">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 06
+      </div>
+      <div class="slide-num">7/14</div>
+    </div>
+
+    <div class="tip-num-badge">🔌</div>
+    <span class="tag">MCP Servers</span>
+    <h2>Connect external tools via&nbsp;MCP</h2>
+    <p class="desc">Model Context Protocol lets Copilot talk to your databases, APIs, Docker, Azure, and 50+ integrations &mdash; mid-conversation.</p>
+
+    <div class="mono-box">.vscode/mcp.json</div>
+
+    <ul class="bullets">
+      <li class="pk">Browse the MCP Registry at <strong>github.com/mcp</strong></li>
+      <li class="pk">Org admins can manage MCP allow-lists for security</li>
+      <li class="pk">Copilot reads real data from your systems at runtime</li>
+      <li class="pk">No more copy-pasting context into prompts</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Copilot stops being autocomplete. Starts being infrastructure.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 8: TIP 07 — Copilot CLI
+     ============================================================ -->
+<div class="slide s-tip07">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 07
+      </div>
+      <div class="slide-num">8/14</div>
+    </div>
+
+    <div class="tip-num-badge">🖥️</div>
+    <span class="tag">CLI</span>
+    <h2>Copilot CLI &mdash; natural language terminal</h2>
+    <p class="desc">Run <code style="background:var(--inset);padding:2px 8px;border-radius:4px;color:var(--coral);">gh copilot</code> from any terminal. Ask in plain English &mdash; it generates shell commands, explains them, and executes with your approval.</p>
+
+    <ul class="bullets">
+      <li class="rd">Ask in English, get the exact command</li>
+      <li class="rd">Now supports <strong>BYOK</strong> and local models (April 2026)</li>
+      <li class="rd">Activity counts toward your org usage metrics</li>
+      <li class="rd">Works on GitHub Mobile too</li>
+    </ul>
+
+    <div class="terminal" style="margin-top: 20px;">
+      <span class="dm">$</span> <span class="str">gh copilot suggest "find all files larger than 100MB"</span><br><br>
+      <span class="cm"># Suggestion:</span><br>
+      <span class="ok">find . -type f -size +100M</span><br><br>
+      <span class="dm">? Execute command?</span> <span class="ok">Yes</span>
+    </div>
+
+    <div class="tagline">
+      &ldquo;Stop Googling terminal commands.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 9: TIP 08 — @workspace & Slash Commands
+     ============================================================ -->
+<div class="slide s-tip08">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 08
+      </div>
+      <div class="slide-num">9/14</div>
+    </div>
+
+    <div class="tip-num-badge">🔍</div>
+    <span class="tag">IDE Shortcuts</span>
+    <h2>Master @workspace, @terminal, and slash&nbsp;commands</h2>
+    <p class="desc">Give Copilot full repo context with <strong>@workspace</strong>. Use <strong>@terminal</strong> for CLI help. Fire off instant actions without typing paragraphs.</p>
+
+    <div class="mono-box" style="font-size: 18px; line-height: 2.2;">
+      <span style="color:var(--yellow);">@workspace</span> <span style="color:var(--muted);">"how does auth work?"</span><br>
+      <span style="color:var(--yellow);">@terminal</span> <span style="color:var(--muted);">"why did that test fail?"</span><br>
+      <span style="color:var(--green);">/fix</span> <span style="color:var(--muted);">&rarr; auto-fixes selected code</span><br>
+      <span style="color:var(--green);">/tests</span> <span style="color:var(--muted);">&rarr; generates unit tests</span><br>
+      <span style="color:var(--green);">/explain</span> <span style="color:var(--muted);">&rarr; explains code in detail</span><br>
+      <span style="color:var(--green);">/doc</span> <span style="color:var(--muted);">&rarr; adds documentation</span>
+    </div>
+
+    <div class="tagline">
+      &ldquo;Shortcuts beat paragraphs. Every time.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 10: TIP 09 — PR Code Review
+     ============================================================ -->
+<div class="slide s-tip09">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 09
+      </div>
+      <div class="slide-num">10/14</div>
+    </div>
+
+    <div class="tip-num-badge">📝</div>
+    <span class="tag">Code Review</span>
+    <h2>Let Copilot review your pull&nbsp;requests</h2>
+    <p class="desc">Copilot Code Review runs on PRs automatically &mdash; catches bugs, security issues, and style violations before human reviewers even look.</p>
+
+    <ul class="bullets">
+      <li class="rd">Enable in repo settings &rarr; Copilot &rarr; Code Review</li>
+      <li class="rd">Catches security vulnerabilities automatically</li>
+      <li class="rd">PR merge metrics now tracked in usage API</li>
+      <li class="rd">Active &amp; passive review user metrics (April 2026)</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;AI catches what humans miss. Before merge.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 11: TIP 10 — Copilot SDK
+     ============================================================ -->
+<div class="slide s-tip10">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 10
+      </div>
+      <div class="slide-num">11/14</div>
+    </div>
+
+    <div class="tip-num-badge">🧰</div>
+    <span class="tag">SDK &middot; NEW &middot; April 2026</span>
+    <h2>Build with the Copilot&nbsp;SDK</h2>
+    <p class="desc">The Copilot SDK (public preview) lets you embed Copilot capabilities in your own apps, extensions, and internal tools programmatically.</p>
+
+    <ul class="bullets">
+      <li class="tl">Build custom AI features powered by Copilot's models</li>
+      <li class="tl">Create internal developer tools with Copilot intelligence</li>
+      <li class="tl">Manage agent skills via GitHub CLI</li>
+      <li class="tl">Extend VS Code with Copilot-powered extensions</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Copilot isn't just a tool. It's a platform.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 12: TIP 11 — Enterprise Governance
+     ============================================================ -->
+<div class="slide s-tip11">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 11
+      </div>
+      <div class="slide-num">12/14</div>
+    </div>
+
+    <div class="tip-num-badge">🏢</div>
+    <span class="tag">Enterprise</span>
+    <h2>Configure org-level governance</h2>
+    <p class="desc">Enterprise controls are now granular: runner controls, firewall settings, custom properties for cloud agent, audit logs, and data residency.</p>
+
+    <ul class="bullets">
+      <li class="or">Org runner controls for Cloud Agent (April 2026)</li>
+      <li class="or">Firewall settings to control agent network access</li>
+      <li class="or">MCP server allow-lists per organization</li>
+      <li class="or">Data residency in US + EU &mdash; FedRAMP compliant</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Power without governance is chaos.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 13: TIP 12 — Repo = Brain
+     ============================================================ -->
+<div class="slide s-tip12">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Tip 12
+      </div>
+      <div class="slide-num">13/14</div>
+    </div>
+
+    <div class="tip-num-badge">🔄</div>
+    <span class="tag">Best Practice</span>
+    <h2>Your repo IS Copilot's&nbsp;brain</h2>
+    <p class="desc">Copilot's output quality is directly proportional to your repo quality. Clean structure, good README, meaningful names, and consistent patterns make every suggestion better.</p>
+
+    <ul class="bullets">
+      <li class="bl">Organize folders logically &mdash; Copilot indexes them</li>
+      <li class="bl">Write a solid <strong>README.md</strong> &mdash; it's the first thing Copilot reads</li>
+      <li class="bl">Use consistent naming conventions throughout</li>
+      <li class="bl">Use <strong>Copilot Spaces</strong> to share curated context with your team</li>
+    </ul>
+
+    <div class="tagline">
+      &ldquo;Garbage repo in, garbage suggestions out.&rdquo;
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 14: CTA
+     ============================================================ -->
+<div class="slide s-cta">
+  <div class="slide-inner">
+    <div class="top-bar">
+      <div class="brand">
+        <svg width="28" height="28" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub Copilot
+      </div>
+      <div class="slide-num">14/14</div>
+    </div>
+
+    <h1>Stop using Copilot like&nbsp;autocomplete.</h1>
+    <p class="desc">These 12 features separate the top 1% from everyone else. The gap is only getting wider.</p>
+
+    <div class="cta-actions">
+      <div class="cta-btn">Full Cheatsheet &rarr; Link in Comments</div>
+      <p class="engage-text">&#x267B;&#xFE0F; <strong>Repost</strong> if your network needs to see this</p>
+      <p class="engage-text">&#x1F4BE; <strong>Save</strong> this carousel for later</p>
+    </div>
+
+    <div class="cta-hashtags">
+      #GitHubCopilot &nbsp; #AI &nbsp; #DeveloperProductivity &nbsp; #CopilotAgent &nbsp; #SoftwareEngineering &nbsp; #DevTools &nbsp; #GitHub
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
