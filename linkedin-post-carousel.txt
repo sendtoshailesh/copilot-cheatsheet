@@ -1,6 +1,6 @@
 𝟵𝟵% 𝗼𝗳 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿𝘀 𝗮𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝗚𝗶𝘁𝗛𝘂𝗯 𝗖𝗼𝗽𝗶𝗹𝗼𝘁 𝘄𝗿𝗼𝗻𝗴.
 
-I compiled 12 tips into an 18-slide visual carousel — with QR codes, real docs links, and resource pages you can scan right from your phone.
+I compiled 12 tips into a 14-slide visual carousel — with real examples, inline code, terminal mockups, and official GitHub Docs links on every slide.
 
 Here's what's inside ↓
 
@@ -21,7 +21,7 @@ Here's what's inside ↓
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-↳ 𝗘𝗮𝗰𝗵 𝘁𝗶𝗽 includes terminal mockups, flow diagrams, clickable URLs, and QR codes linking to official GitHub Docs.
+↳ 𝗘𝗮𝗰𝗵 𝘁𝗶𝗽 is fully consolidated on one page — with examples, pro tips, code snippets, and clickable docs links.
 
 💡 𝘛𝘩𝘪𝘴 𝘪𝘴𝘯'𝘵 𝘢 "𝘵𝘰𝘱 𝘵𝘪𝘱𝘴" 𝘭𝘪𝘴𝘵𝘪𝘤𝘭𝘦 — it's a visual reference you'll actually come back to.
 

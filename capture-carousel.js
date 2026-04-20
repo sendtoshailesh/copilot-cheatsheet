@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const SLIDE_W = 1080;
 const SLIDE_H = 1350;
-const TOTAL_SLIDES = 18;
+const TOTAL_SLIDES = 14;
 const DPR = 2; // retina
 
 (async () => {
@@ -23,12 +23,8 @@ const DPR = 2; // retina
     await page.evaluateHandle('document.fonts.ready');
     await new Promise(r => setTimeout(r, 2000));
 
-    // Wait for QR codes to generate
-    await page.waitForFunction(
-        () => document.body.getAttribute('data-qr-ready') === 'true',
-        { timeout: 10000 }
-    ).catch(() => console.warn('⚠️  QR codes may not have loaded (CDN timeout)'));
-    await new Promise(r => setTimeout(r, 1000));
+    // Extra settling time for fonts and layout
+    await new Promise(r => setTimeout(r, 500));
 
     // Hide the instructions bar and remove body padding/gap for PDF
     await page.evaluate(() => {
