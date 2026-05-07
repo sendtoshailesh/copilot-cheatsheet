@@ -377,6 +377,47 @@
     color: var(--fg);
   }
 
+  /* ============ SCENARIO BOX ============ */
+  .scenario-box {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+  .scenario-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    align-items: baseline;
+  }
+  .scenario-row:last-child { margin-bottom: 0; }
+  .scenario-icon {
+    flex-shrink: 0;
+    width: 22px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .scenario-tag {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 1px 6px;
+    border-radius: 3px;
+    min-width: 62px;
+    text-align: center;
+  }
+  .scenario-tag.sit { background: rgba(88,166,255,0.12); color: var(--blue); }
+  .scenario-tag.prob { background: rgba(248,81,73,0.12); color: var(--red); }
+  .scenario-tag.sol { background: rgba(63,185,80,0.12); color: var(--green); }
+  .scenario-tag.met { background: rgba(188,140,255,0.12); color: var(--purple); }
+  .scenario-text { color: var(--muted); }
+  .scenario-text strong { color: var(--fg); }
+
   /* ============ COVER ============ */
   .s-cover .slide-inner {
     background:
@@ -736,9 +777,11 @@
       <li class="bl"><strong>Agent</strong> &mdash; hands-on coding with iterative self-correction across files</li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Adding Stripe Payments</div>
-      <code>💬 Ask: "Explain how our checkout flow works"<br>📝 Plan: "Add Stripe subscription billing" &rarr; plan.md with 8 steps<br>🤖 Agent: Implements all 8 steps, creates tests, runs them<br>⚡ Autopilot: Approved plan &rarr; builds the remaining 3 services unattended</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Your SaaS app needs <strong>Stripe subscription billing</strong> added to 5 services</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Manual coding takes a full sprint; payment logic is error-prone across services</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">💬 Ask: "Explain checkout flow" &rarr; 📝 Plan: 8-step plan.md &rarr; 🤖 Agent builds &rarr; ⚡ Autopilot finishes</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>5 days &rarr; 4 hours</strong> &middot; 92% test coverage &middot; zero payment bugs in production</span></div>
     </div>
 
     <div class="slide-links">
@@ -808,9 +851,11 @@
       <li class="gr">Manage sessions from Issues, Projects, or <strong>GitHub Mobile</strong></li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Bug Fix at 2 AM</div>
-      <code>Issue #412: "Login fails when email has + sign"<br>🤖 Copilot assigned &rarr; fixes regex in auth.ts &rarr; adds 3 test cases<br>⚙️ Actions CI: lint ✓ test ✓ build ✓ &rarr; PR #413 ready for morning review</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Production bug: <strong>login fails when email contains a + sign</strong></span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">It's 2 AM, no one is online. Users are locked out and churning.</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Assign issue #412 to Copilot &rarr; fixes regex in auth.ts &rarr; adds 3 tests &rarr; CI green &rarr; PR ready by morning</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>MTTR: 6 hours &rarr; 22 minutes</strong> &middot; zero human wake-up &middot; CI passed on first attempt</span></div>
     </div>
 
     <div class="slide-links">
@@ -869,14 +914,11 @@
       <span style="color:var(--dim);">Level 4:</span> <span style="color:var(--orange);">AGENTS.md / .agent.md</span> &mdash; agent-specific rules
     </div>
 
-    <div class="example-box">
-      <div class="example-label">📄 applyTo Pattern Examples</div>
-      <code>
-        applyTo: "**/*.test.ts" &nbsp;&rarr; testing conventions<br>
-        applyTo: "src/api/**" &nbsp;&nbsp;&rarr; API design rules<br>
-        applyTo: "**/*.md" &nbsp;&nbsp;&nbsp;&nbsp;&rarr; writing style guide<br>
-        applyTo: "infra/**" &nbsp;&nbsp;&nbsp;&rarr; IaC / Terraform rules
-      </code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">50-dev team writes <strong>inconsistent code</strong> across frontend, API, and infra</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">PRs fail review for style issues; new hires take weeks to learn conventions</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">applyTo: <code style="color:var(--orange);">**/*.test.ts</code> &rarr; Vitest rules | <code style="color:var(--orange);">src/api/**</code> &rarr; REST patterns | <code style="color:var(--orange);">infra/**</code> &rarr; Terraform conventions</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>PR rejections down 60%</strong> &middot; onboarding: 3 weeks &rarr; 3 days &middot; style reviews eliminated</span></div>
     </div>
 
     <ul class="bullets">
@@ -952,9 +994,11 @@
       <li class="pu">⚠️ Usage-based billing starts <strong>June 1, 2026</strong></li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: E-commerce Team</div>
-      <code>Search page fix &rarr; auto (routes to GPT-5.4 mini, 1x) &mdash; done in seconds<br>Payment refactor &rarr; Claude Opus 4.7 (50x) &mdash; understands complex state<br>API docs for 30 endpoints &rarr; GPT-5.5 (8x) &mdash; fast + high quality</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Team of 8 handles <strong>search fixes, payment refactors, and API docs</strong> daily</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Using one model for everything wastes premium requests on simple tasks</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Search fix &rarr; auto/mini (1x) | Payment refactor &rarr; Opus 4.7 (50x) | Docs &rarr; GPT-5.5 (8x)</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Premium requests down 40%</strong> &middot; same output quality &middot; $2,400/mo saved on team plan</span></div>
     </div>
 
     <div class="slide-links">
@@ -1005,15 +1049,11 @@
 
     <div class="mono-box">.github/prompts/code-review.prompt.md<br>.github/prompts/add-tests.prompt.md<br>.github/prompts/refactor-to-pattern.prompt.md<br>.github/prompts/deploy-checklist.prompt.md</div>
 
-    <div class="example-box">
-      <div class="example-label">📄 Sample add-tests.prompt.md</div>
-      <code>
-        Write unit tests for the selected code using Vitest.<br>
-        - Cover happy path, edge cases, and error scenarios<br>
-        - Mock external dependencies with vi.mock()<br>
-        - Use descriptive test names: "should [verb] when [condition]"<br>
-        - Aim for &gt;90% branch coverage
-      </code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Team writes tests differently &mdash; <strong>no consistency</strong> in mocking, naming, or coverage</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Test quality varies wildly; reviewers spend hours standardizing test PRs</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Create <code style="color:var(--cyan);">add-tests.prompt.md</code> with Vitest rules, naming conventions, 90% branch coverage target &rarr; invoke with /add-tests</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Test review time down 70%</strong> &middot; coverage: 62% &rarr; 91% &middot; consistent test style across 12 developers</span></div>
     </div>
 
     <ul class="bullets">
@@ -1070,17 +1110,11 @@
       <div class="flow-step">🗄️ DBs &middot; APIs &middot; Cloud</div>
     </div>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: DevOps Dashboard</div>
-      <code>
-        {<br>
-        &nbsp;&nbsp;"servers": {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;"github": { "type": "http", "url": "https://api.githubcopilot.com/mcp/" },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;"postgres": { "command": "npx", "args": ["@mcp/server-postgres", "$DB_URL"] }<br>
-        &nbsp;&nbsp;}<br>
-        }<br>
-        Agent queries live DB &rarr; "Show me users who signed up this week but never logged in"
-      </code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">DevOps team manages <strong>Postgres + GitHub repos</strong> but context-switches between tools</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Debugging requires 4 browser tabs: GitHub, DB client, monitoring, docs</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Connect Postgres + GitHub MCP servers &rarr; ask Copilot: "Show users who signed up this week but never logged in"</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Investigation time: 25 min &rarr; 90 seconds</strong> &middot; zero context-switching &middot; queries run live from chat</span></div>
     </div>
 
     <ul class="bullets">
@@ -1138,9 +1172,11 @@
       <span class="ok">✓</span> <span class="dm">Ran</span> npm test &mdash; <span class="ok">47/47 passed</span>
     </div>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Migrating Express to Fastify</div>
-      <code>$ copilot --plan "Migrate our Express API to Fastify"<br>📝 Plan asks: "Keep middleware? Migrate tests? Update Docker?"<br>🧐 Critic agent flags: "Missing error handling for streaming routes"<br>✅ Approve &rarr; Autopilot migrates 23 routes, updates 41 tests, fixes Dockerfile</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Backend lead needs to <strong>migrate Express to Fastify</strong> across 23 routes</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Manual migration is tedious; missing edge cases in streaming routes</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text"><code style="color:var(--coral);">copilot --plan</code> creates plan.md &rarr; critic flags streaming gaps &rarr; Autopilot migrates all routes + updates 41 tests</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>2-week migration &rarr; 1 afternoon</strong> &middot; 0 regressions &middot; all streaming edge cases covered</span></div>
     </div>
 
     <ul class="bullets">
@@ -1218,9 +1254,11 @@
       <li class="yl">🦆 <strong>Rubber duck</strong>: use Ask mode to think out loud &mdash; Copilot challenges your logic</li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🦆 Real-World: Debugging a Production Memory Leak</div>
-      <code>"Our Node.js app leaks 50MB/hour after deploying the caching layer. I think the Redis client holds references after disconnect. Walk me through why." &mdash; Copilot finds the missing .unref() call</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Node.js app <strong>leaks 50MB/hour</strong> after deploying a new caching layer</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Classic heap dump analysis takes hours; the leak is subtle and intermittent</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Ask mode: "Redis client holds references after disconnect &mdash; am I wrong?" &rarr; Copilot finds the missing <code style="color:var(--yellow);">.unref()</code> call</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Debug time: 4 hours &rarr; 8 minutes</strong> &middot; memory stable at 120MB &middot; no heap dump tools needed</span></div>
     </div>
 
     <div class="slide-links">
@@ -1269,9 +1307,11 @@
       <li class="rd">⚠️ Code review will consume <strong>Actions minutes</strong> starting June 1</li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Catching a Security Flaw Before Merge</div>
-      <code>PR #287: Add user search endpoint<br>🤖 Copilot flags: "SQL injection risk — user input passed directly to query"<br>🔧 Suggests: parameterized query with $1 placeholder &rarr; click to apply</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Junior dev adds a <strong>user search endpoint</strong> with raw SQL in the query</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">SQL injection vulnerability &mdash; human reviewers might miss it in a large PR</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Copilot auto-review flags: "SQL injection risk" &rarr; suggests parameterized query with <code style="color:var(--red);">$1</code> placeholder &rarr; one-click apply</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Security vuln caught in 30 seconds</strong> &middot; 0 manual review effort &middot; fix applied before human sees the PR</span></div>
     </div>
 
     <div class="slide-links">
@@ -1333,13 +1373,11 @@
       </div>
     </div>
 
-    <div class="example-box">
-      <div class="example-label">⭐ awesome-copilot</div>
-      <code>
-        github.com/github/awesome-copilot &mdash; curated collection of:<br>
-        &bull; Custom agents &bull; Skills &bull; Instructions &bull; Prompt files &bull; MCP configs<br>
-        Browse &rarr; copy &rarr; customize for your team
-      </code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Platform team manages <strong>Azure infra + GitHub repos</strong> for 20 microservices</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Engineers install random MCP servers and extensions with no visibility or control</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Install curated plugins from <strong>awesome-copilot</strong> &rarr; scope with skills field &rarr; manage with <code style="color:var(--teal);">gh copilot skill</code></span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>30+ custom skills shared across org</strong> &middot; consistent agent behavior &middot; zero shadow tooling</span></div>
     </div>
 
     <ul class="bullets">
@@ -1388,16 +1426,11 @@
     <h2>Configure org-level governance</h2>
     <p class="desc">Granular enterprise controls now cover Cloud Agent, model access, MCP, audit logs, hooks, and smarter permission persistence. Power without governance is chaos.</p>
 
-    <div class="example-box">
-      <div class="example-label">🔒 Governance Checklist</div>
-      <code>
-        ✅ Set org-level Copilot instructions (enforced for all repos)<br>
-        ✅ Configure HTTP hooks that POST JSON to internal URLs<br>
-        ✅ Use preToolUse hooks to approve or deny actions programmatically<br>
-        ✅ Define MCP server allow-lists per organization<br>
-        ✅ Enable audit logs and route them into SIEM tools<br>
-        ✅ Persist approvals by location for trusted folders
-      </code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Enterprise with <strong>500 developers</strong> across 3 countries using Copilot</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">No visibility into what Copilot does; compliance team blocks rollout</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">preToolUse hooks log all actions &rarr; sandbox allowNetwork for safe agent ops &rarr; data residency US/EU &rarr; OTel tracing to SIEM</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Compliance approved in 2 weeks</strong> &middot; full audit trail &middot; FedRAMP-authorized models for regulated teams</span></div>
     </div>
 
     <ul class="bullets">
@@ -1469,9 +1502,11 @@
       </div>
     </div>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Onboarding a New Developer</div>
-      <code>Day 1: Clone repo &rarr; Copilot reads README + instructions + patterns<br>💬 "How does the payment flow work?" &rarr; accurate answer from repo context<br>🤖 "Add a discount code feature" &rarr; follows existing patterns automatically</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">New developer joins a <strong>200-file monorepo</strong> with complex domain logic</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Onboarding takes 3 weeks; Copilot gives generic suggestions because repo has no docs</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">Add README with architecture + copilot-instructions.md + ADRs &rarr; Copilot suggestions become precise and domain-aware</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>Onboarding: 3 weeks &rarr; 4 days</strong> &middot; first PR on day 2 &middot; Copilot follows team patterns from day 1</span></div>
     </div>
 
     <ul class="bullets">
@@ -1662,9 +1697,11 @@
       <li class="co"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">/chronicle</code> generates standup summaries, tips, and improvement suggestions</li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Start at Desk, Continue on Train</div>
-      <code>💻 Office: copilot --remote "Refactor the billing module"<br>🚆 Commute: Open GitHub.com on phone &rarr; review progress &rarr; approve changes<br>🏠 Home: /chronicle &rarr; get standup summary of everything done today</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Tech lead starts a <strong>billing module refactor</strong> at the office</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">Work stops when leaving the office; context is lost between devices</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text"><code style="color:var(--coral);">--remote</code> at desk &rarr; review on phone during commute &rarr; <code style="color:var(--coral);">/chronicle</code> for standup at home</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>2 extra productive hours/day</strong> &middot; zero context loss &middot; standup written automatically</span></div>
     </div>
     </ul>
 
@@ -1759,9 +1796,11 @@
       <li class="yl">Use <strong>Plan</strong> before complex work &mdash; the critic agent catches flaws early</li>
     </ul>
 
-    <div class="example-box">
-      <div class="example-label">🎬 Real-World: Building a New Feature End-to-End</div>
-      <code>🔬 /research "How do competitors implement SSO?" &rarr; report.md<br>💬 Ask: "What OAuth library fits our stack?" &rarr; recommends next-auth<br>📝 Plan: "Add SSO with Google + SAML" &rarr; 12-step plan.md reviewed by critic<br>🤖 Agent: Implements steps 1-8 with tests &rarr; ⚡ Autopilot finishes 9-12</code>
+    <div class="scenario-box">
+      <div class="scenario-row"><span class="scenario-tag sit">Scenario</span><span class="scenario-text">Team needs to add <strong>SSO with Google + SAML</strong> to their app</span></div>
+      <div class="scenario-row"><span class="scenario-tag prob">Problem</span><span class="scenario-text">No one on the team has built SSO before; wrong architecture choice means months of rework</span></div>
+      <div class="scenario-row"><span class="scenario-tag sol">Solution</span><span class="scenario-text">🔬 Research competitors &rarr; 💬 Ask "Which OAuth lib?" &rarr; 📝 Plan 12 steps + critic review &rarr; 🤖 Agent builds &rarr; ⚡ Autopilot finishes</span></div>
+      <div class="scenario-row"><span class="scenario-tag met">Result</span><span class="scenario-text"><strong>3-week estimate &rarr; 2 days</strong> &middot; correct architecture from the start &middot; zero rework</span></div>
     </div>
     </ul>
 
