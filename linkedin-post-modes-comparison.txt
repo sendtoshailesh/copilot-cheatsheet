@@ -1,0 +1,74 @@
+𝗚𝗶𝘁𝗛𝘂𝗯 𝗖𝗼𝗽𝗶𝗹𝗼𝘁 𝗖𝗟𝗜: 𝟯 𝗠𝗼𝗱𝗲𝘀. 𝟯 𝗪𝗮𝘆𝘀 𝘁𝗼 𝗧𝗵𝗶𝗻𝗸.
+
+Most developers only use Copilot CLI's default mode.
+
+They're leaving 66% of its thinking power on the table.
+
+Here's the framework that separates the top 1%:
+
+━━━━━━━━━━━━━━━━━━━━
+
+🔍 𝗥𝗲𝘀𝗲𝗮𝗿𝗰𝗵 = Explorer's Mind
+
+→ /research TOPIC
+→ Deep autonomous investigation
+→ Produces comprehensive report with citations
+→ Never interrupts you — fully autonomous
+→ Use BEFORE planning anything complex
+
+𝘓𝘪𝘧𝘦𝘤𝘺𝘤𝘭𝘦 𝘱𝘩𝘢𝘴𝘦: DISCOVERY
+
+━━━━━━━━━━━━━━━━━━━━
+
+💬 𝗔𝘀𝗸/𝗘𝘅𝗲𝗰𝘂𝘁𝗲 = Builder's Mind
+
+→ Default mode (just run `copilot`)
+→ Interactive back-and-forth
+→ ✅ CAN edit files (with approval)
+→ ✅ CAN run shell commands
+→ The workhorse for daily development
+
+𝘓𝘪𝘧𝘦𝘤𝘺𝘤𝘭𝘦 𝘱𝘩𝘢𝘴𝘦: BUILD
+
+━━━━━━━━━━━━━━━━━━━━
+
+🗺️ 𝗣𝗹𝗮𝗻 𝗠𝗼𝗱𝗲 = Architect's Mind
+
+→ Shift+Tab or /plan
+→ Asks clarifying questions UP-FRONT
+→ Creates structured plan.md before any code
+→ ❌ Never writes code until you approve
+→ Then: Autopilot executes hands-free
+
+𝘓𝘪𝘧𝘦𝘤𝘺𝘤𝘭𝘦 𝘱𝘩𝘢𝘴𝘦: DESIGN
+
+━━━━━━━━━━━━━━━━━━━━
+
+⚡ 𝗧𝗵𝗲 𝗣𝗼𝘄𝗲𝗿 𝗪𝗼𝗿𝗸𝗳𝗹𝗼𝘄:
+
+/research → /plan → approve → autopilot → ship
+
+This is what 99% of users don't do.
+They jump straight to Build.
+
+The top 1% Research first. Plan second. Build third.
+
+━━━━━━━━━━━━━━━━━━━━
+
+💡 Quick cheat sheet:
+
+• Understand deeply → /research
+• Build/fix now → Ask/Execute (default)
+• Complex multi-step → Plan mode (Shift+Tab)
+• Not sure? → /research first, always.
+
+━━━━━━━━━━━━━━━━━━━━
+
+♻️ Save this. Share with a dev who uses Copilot.
+🔔 Follow for more Copilot power-user tips.
+
+#GitHubCopilot #CopilotCLI #DevTools #AI #SoftwareEngineering #DeveloperProductivity
+
+━━━━━━━━━━━━━━━━━━━━
+📎 Carousel PDF attached (swipe →)
+by Shailesh | linkedin.com/in/shaileshmishra1

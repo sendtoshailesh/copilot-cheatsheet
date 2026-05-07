@@ -430,7 +430,6 @@
   }
   .cover-author strong { color: rgba(255,255,255,0.75); font-weight: 700; }
   .cover-author a { color: var(--blue); text-decoration: none; }
-  .cover-note { font-size: 14px; color: rgba(255,255,255,0.38); font-weight: 600; margin-top: 14px; letter-spacing: 0.02em; }
 
   /* ============ TIP SLIDE COLOR VARIANTS ============ */
   .s-tip01 .slide-inner { background: radial-gradient(ellipse 80% 60% at 20% 20%, rgba(88,166,255,0.1), transparent), var(--bg); }
@@ -480,62 +479,6 @@
   .s-tip12 .slide-inner { background: radial-gradient(ellipse 80% 60% at 40% 20%, rgba(88,166,255,0.08), transparent), var(--bg); }
   .s-tip12 .tag { background: rgba(88,166,255,0.12); color: var(--blue); }
   .s-tip12 .tip-num-badge { background: rgba(88,166,255,0.12); color: var(--blue); }
-
-  .s-tip13 .slide-inner { background: radial-gradient(ellipse 80% 60% at 65% 20%, rgba(118,227,234,0.09), transparent), var(--bg); }
-  .s-tip13 .tag { background: rgba(118,227,234,0.12); color: var(--cyan); }
-  .s-tip13 .tip-num-badge { background: rgba(118,227,234,0.12); color: var(--cyan); }
-
-  .s-tip14 .slide-inner { background: radial-gradient(ellipse 80% 60% at 25% 75%, rgba(247,120,186,0.08), transparent), var(--bg); }
-  .s-tip14 .tag { background: rgba(247,120,186,0.12); color: var(--pink); }
-  .s-tip14 .tip-num-badge { background: rgba(247,120,186,0.12); color: var(--pink); }
-
-  .s-tip15 .slide-inner { background: radial-gradient(ellipse 80% 60% at 75% 75%, rgba(234,96,69,0.08), transparent), var(--bg); }
-  .s-tip15 .tag { background: rgba(234,96,69,0.12); color: var(--coral); }
-  .s-tip15 .tip-num-badge { background: rgba(234,96,69,0.12); color: var(--coral); }
-
-  .s-tip16 .slide-inner { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(227,179,65,0.09), transparent), var(--bg); }
-  .s-tip16 .tag { background: rgba(227,179,65,0.12); color: var(--yellow); }
-  .s-tip16 .tip-num-badge { background: rgba(227,179,65,0.12); color: var(--yellow); }
-
-  .modes-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .modes-grid.row-2 {
-    grid-template-columns: 1fr 1fr;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
-  .mode-card {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 10px;
-    padding: 12px 14px;
-    text-align: center;
-  }
-  .mode-card .mode-icon { font-size: 22px; margin-bottom: 4px; }
-  .mode-card .mode-name {
-    font-size: 14px;
-    font-weight: 800;
-    margin-bottom: 3px;
-  }
-  .mode-card .mode-when {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .mode-card .mode-key {
-    margin-top: 6px;
-    font-size: 11px;
-    font-family: 'SFMono-Regular', Consolas, monospace;
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-block;
-  }
 
   /* ============ CTA SLIDE ============ */
   .s-cta .slide-inner {
@@ -643,13 +586,13 @@
 <body>
 
 <div class="instructions">
-  <strong>LinkedIn Carousel — 18 slides, 1080&times;1350px (4:5 portrait)</strong><br>
+  <strong>LinkedIn Carousel — 14 slides, 1080&times;1350px (4:5 portrait)</strong><br>
   Export with <code>node capture-carousel.js</code> to generate a PDF for LinkedIn document upload.<br>
-  16 consolidated tips with examples, links, and personal branding on every slide.
+  12 consolidated tips with examples, links, and personal branding on every slide.
 </div>
 
 <!-- ============================================================
-     SLIDE 1 / 18: COVER
+     SLIDE 1 / 14: COVER
      ============================================================ -->
 <div class="slide s-cover">
   <div class="slide-inner">
@@ -658,20 +601,19 @@
         <svg width="28" height="28" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub Copilot
       </div>
-      <div class="slide-num">1/18</div>
+      <div class="slide-num">1/14</div>
     </div>
 
     <div class="cover-pill">
       <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      16 Expert Tips &middot; May 2026
+      12 Expert Tips &middot; April 2026
     </div>
     <h1>How to use GitHub&nbsp;Copilot better than 99% of&nbsp;people</h1>
-    <p class="desc">Agent Mode, Cloud Agent, MCP Servers, Copilot CLI, /research, Autopilot, and the features most developers still miss.</p>
+    <p class="desc">Agent Mode, Cloud Agent, MCP Servers, Copilot CLI, and the features most developers don't know exist.</p>
     <div class="cover-divider"></div>
     <div class="cover-author">by <strong>Shailesh Mishra</strong> &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">LinkedIn</a> &nbsp;|&nbsp; @sendtoshailesh</div>
-    <div class="cover-note">Based on the latest GitHub Changelog &middot; May 2026</div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -681,13 +623,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 2 / 18: TIP 01 — Agent Mode
+     SLIDE 2 / 14: TIP 01 — Agent Mode
      ============================================================ -->
 <div class="slide s-tip01">
   <div class="slide-inner">
@@ -696,50 +638,43 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 01
       </div>
-      <div class="slide-num">2/18</div>
+      <div class="slide-num">2/14</div>
     </div>
 
-    <div class="tip-num-badge">🧭</div>
-    <span class="tag">Modes &middot; Strategy</span>
-    <h2>Master 3 modes &mdash; Ask, Plan,&nbsp;Agent</h2>
-    <p class="desc">Most developers stay in one mode. Power users <strong>switch between all three</strong> depending on the task &mdash; plus unlock <strong>Autopilot</strong> and <strong>/research</strong> as power features on top.</p>
+    <div class="tip-num-badge">⚡</div>
+    <span class="tag">IDE &middot; Agent Mode</span>
+    <h2>Switch to Agent Mode &mdash; stop using plain&nbsp;chat</h2>
+    <p class="desc">Agent mode doesn't just suggest code. It edits files, runs terminal commands, installs packages, and self-corrects errors in a loop &mdash; all autonomously.</p>
 
-    <div class="modes-grid">
-      <div class="mode-card">
-        <div class="mode-icon">💬</div>
-        <div class="mode-name" style="color:var(--blue);">Ask</div>
-        <div class="mode-when">Quick Q&amp;A, explain code, rubber-duck debugging &mdash; no file edits</div>
-        <div class="mode-key" style="background:rgba(88,166,255,0.1);color:var(--blue);">/ask or Shift+Tab</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-icon">📝</div>
-        <div class="mode-name" style="color:var(--pink);">Plan</div>
-        <div class="mode-when">Asks questions first, writes plan.md, critic agent reviews before coding</div>
-        <div class="mode-key" style="background:rgba(247,120,186,0.1);color:var(--pink);">--plan or Shift+Tab</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-icon">🤖</div>
-        <div class="mode-name" style="color:var(--green);">Agent</div>
-        <div class="mode-when">Autonomous IDE edits, multi-file changes, self-corrects in a loop</div>
-        <div class="mode-key" style="background:rgba(63,185,80,0.1);color:var(--green);">Default in VS Code</div>
-      </div>
+    <div class="terminal">
+      <span class="cm">// One prompt in Agent mode:</span><br>
+      <span class="dm">&gt;</span> <span class="str">"Add a /health endpoint with tests"</span><br><br>
+      <span class="ok">✓</span> <span class="dm">Created</span> <span class="hl">src/routes/health.ts</span><br>
+      <span class="ok">✓</span> <span class="dm">Created</span> <span class="hl">tests/health.test.ts</span><br>
+      <span class="ok">✓</span> <span class="dm">Installed</span> supertest<br>
+      <span class="ok">✓</span> <span class="dm">Ran</span> npm test <span class="ok">&mdash; 3/3 passed</span><br>
+      <span class="ok">✓</span> <span class="dm">Fixed</span> lint error in health.ts &rarr; re-ran &rarr; <span class="ok">clean</span>
     </div>
 
     <ul class="bullets">
-      <li class="bl"><strong>Shift+Tab</strong> cycles Ask &rarr; Plan &rarr; Autopilot in the CLI</li>
-      <li class="bl"><strong>Ask</strong> &mdash; quick lookups, explain code, off-record questions that don&rsquo;t pollute context</li>
-      <li class="bl"><strong>Plan</strong> &mdash; use before complex work; the critic agent catches design flaws early</li>
-      <li class="bl"><strong>Agent</strong> &mdash; hands-on coding with iterative self-correction across files</li>
-      <li class="bl"><strong>Autopilot</strong> &mdash; approve a plan, then it builds unattended (5-message default)</li>
-      <li class="bl"><strong>/research</strong> &mdash; spawns multi-agent investigation with read-only Markdown reports</li>
+      <li class="bl">Open Copilot Chat &rarr; switch dropdown from <strong>Chat</strong> to <strong>Agent</strong></li>
+      <li class="bl">Describe <em>what</em> you want, not <em>how</em> to build it</li>
+      <li class="bl">Agent creates files, runs tests, and auto-fixes failures</li>
+      <li class="bl">Works in VS Code, VS Code Insiders, and JetBrains IDEs</li>
+      <li class="bl">Combine with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--blue);">#file</code> and <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--blue);">#codebase</code> for focused context</li>
     </ul>
 
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot" target="_blank">📖 Copilot Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/how-to-maximize-github-copilots-agentic-capabilities/" target="_blank">📝 Maximize Agentic Capabilities</a>
+    <div class="example-box">
+      <div class="example-label">💡 Pro Tip</div>
+      <code>Use Agent mode for multi-file tasks: "Refactor the auth module to use JWT and update all 14 test files"</code>
     </div>
 
-        <div class="branding-footer">
+    <div class="slide-links">
+      <a href="https://docs.github.com/en/copilot" target="_blank">📖 docs.github.com/en/copilot</a>
+      <a href="https://github.com/features/copilot" target="_blank">🚀 github.com/features/copilot</a>
+    </div>
+
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -749,13 +684,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 3 / 18: TIP 02 — Cloud Agent
+     SLIDE 3 / 14: TIP 02 — Cloud Agent
      ============================================================ -->
 <div class="slide s-tip02">
   <div class="slide-inner">
@@ -764,51 +699,49 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 02
       </div>
-      <div class="slide-num">3/18</div>
+      <div class="slide-num">3/14</div>
     </div>
 
     <div class="tip-num-badge">🤖</div>
-    <span class="tag">Cloud Agent &middot; CI/CD</span>
-    <h2>Assign issues to Copilot &mdash; it ships PRs&nbsp;autonomously</h2>
-    <p class="desc">Copilot Cloud Agent runs on GitHub &mdash; no IDE needed. It researches, codes, opens PRs, runs your CI pipeline, iterates on review feedback, and resolves merge conflicts.</p>
+    <span class="tag">Cloud Agent</span>
+    <h2>Assign issues directly to&nbsp;Copilot</h2>
+    <p class="desc">Copilot Cloud Agent runs in the background on GitHub &mdash; no IDE needed. Assign an issue and it researches, codes, and opens a PR with CI passing.</p>
 
-    <div class="visual-compare">
-      <div class="compare-box">
-        <h5 style="color:var(--green);">🔄 Automated Pipeline</h5>
-        <ul>
-          <li>📋 Issue created</li>
-          <li>🤖 Copilot assigned &rarr; codes PR</li>
-          <li>⚙️ Actions CI: lint, test, build</li>
-          <li>🔀 Auto-deploy to staging</li>
-          <li>✅ Human review &rarr; merge &rarr; prod</li>
-        </ul>
-      </div>
-      <div class="compare-box">
-        <h5 style="color:var(--green);">🛠️ What Agent Handles</h5>
-        <ul>
-          <li>Opens PRs with passing CI</li>
-          <li>Resolves merge conflicts (3 clicks)</li>
-          <li>Iterates on review feedback</li>
-          <li>Triggers workflow automations</li>
-          <li>Signs commits cryptographically</li>
-        </ul>
-      </div>
+    <div class="visual-flow">
+      <div class="flow-step">📋 Open Issue</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step accent-green">🤖 Copilot Codes</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">🔀 PR + CI</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">✅ Review &amp; Merge</div>
     </div>
 
     <ul class="bullets">
       <li class="gr">Open any issue &rarr; Assignees &rarr; select <strong>Copilot</strong></li>
-      <li class="gr">Runs your existing <strong>GitHub Actions</strong> workflows (lint, test, build, deploy)</li>
-      <li class="gr">Manage sessions from Issues, Projects, or <strong>GitHub Mobile</strong></li>
+      <li class="gr">Agent signs its commits and runs your CI pipeline</li>
+      <li class="gr">Works entirely in the cloud &mdash; zero IDE time</li>
+      <li class="gr">Iterates on PR review feedback automatically</li>
       <li class="gr">Add <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--green);">copilot:agent</code> label to auto-assign future issues</li>
     </ul>
 
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent" target="_blank">📖 Cloud Agent Guide</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/whats-new-with-github-copilot-coding-agent/" target="_blank">📝 What's New with Coding Agent</a>
-      <a href="https://github.blog/ai-and-ml/automate-repository-tasks-with-github-agentic-workflows/" target="_blank">📝 Agentic Workflows</a>
+    <div class="example-box">
+      <div class="example-label">💡 Example Issue</div>
+      <code>"Fix the 404 error on /api/users/:id when user has no profile photo. Return default avatar URL."</code>
     </div>
 
-        <div class="branding-footer">
+    <div class="terminal">
+      <span class="dm">$</span> <span class="str">gh issue edit 123 --add-assignee @copilot</span><br>
+      <span class="ok">✓</span> Copilot assigned to issue #123<br>
+      <span class="ok">✓</span> PR #124 opened &mdash; <span class="hl">3 files changed</span>, CI green
+    </div>
+
+    <div class="slide-links">
+      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent" target="_blank">📖 Cloud Agent Guide</a>
+      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/create-a-pr" target="_blank">📖 Creating PRs with Copilot</a>
+    </div>
+
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -818,13 +751,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 4 / 18: TIP 03 — Custom Instructions
+     SLIDE 4 / 14: TIP 03 — Custom Instructions
      ============================================================ -->
 <div class="slide s-tip03">
   <div class="slide-inner">
@@ -833,55 +766,40 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 03
       </div>
-      <div class="slide-num">4/18</div>
+      <div class="slide-num">4/14</div>
     </div>
 
     <div class="tip-num-badge">📋</div>
-    <span class="tag">Config &middot; applyTo</span>
-    <h2>Layer custom instructions &mdash; org, repo, path,&nbsp;file</h2>
-    <p class="desc">Instructions cascade from org &rarr; repo &rarr; path-specific &rarr; inline. Use <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--orange);">applyTo</code> glob patterns to scope rules to exactly the right files.</p>
+    <span class="tag">Config</span>
+    <h2>Add custom instructions &mdash;&nbsp;once</h2>
+    <p class="desc">One file in your repo tells Copilot your coding standards. Every session reads it automatically &mdash; IDE, Cloud Agent, CLI, and Code Review.</p>
 
-    <div class="visual-flow">
-      <div class="flow-step" style="border-color:var(--orange);color:var(--orange);">🏢 Org</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--orange);color:var(--orange);">📁 Repo</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--orange);color:var(--orange);">📂 Path</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--orange);color:var(--orange);">🤖 Agent</div>
-    </div>
-
-    <div class="mono-box" style="font-size:13px;line-height:1.7;">
-      <span style="color:var(--dim);">Level 1:</span> <span style="color:var(--orange);">Org-level</span> &mdash; enforced for all repos (GA)<br>
-      <span style="color:var(--dim);">Level 2:</span> <span style="color:var(--orange);">.github/copilot-instructions.md</span> &mdash; repo-wide<br>
-      <span style="color:var(--dim);">Level 3:</span> <span style="color:var(--orange);">.github/instructions/*.instructions.md</span> &mdash; with applyTo globs<br>
-      <span style="color:var(--dim);">Level 4:</span> <span style="color:var(--orange);">AGENTS.md / .agent.md</span> &mdash; agent-specific rules
-    </div>
+    <div class="mono-box">.github/copilot-instructions.md<br>.github/instructions/*.instructions.md<br>AGENTS.md</div>
 
     <div class="example-box">
-      <div class="example-label">📄 applyTo Pattern Examples</div>
+      <div class="example-label">📄 Sample copilot-instructions.md</div>
       <code>
-        applyTo: "**/*.test.ts" &nbsp;&rarr; testing conventions<br>
-        applyTo: "src/api/**" &nbsp;&nbsp;&rarr; API design rules<br>
-        applyTo: "**/*.md" &nbsp;&nbsp;&nbsp;&nbsp;&rarr; writing style guide<br>
-        applyTo: "infra/**" &nbsp;&nbsp;&nbsp;&rarr; IaC / Terraform rules
+        - Use TypeScript strict mode for all new files<br>
+        - Follow the repository pattern: controller &rarr; service &rarr; repo<br>
+        - Always add JSDoc comments for public methods<br>
+        - Use Vitest for testing, aim for 80% coverage<br>
+        - Never use `any` type &mdash; use `unknown` instead
       </code>
     </div>
 
     <ul class="bullets">
-      <li class="or">Instructions stack: org + repo + path-specific all apply together</li>
-      <li class="or"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--orange);">applyTo</code> globs target rules to specific folders, extensions, or patterns</li>
+      <li class="or">Define language, framework, and testing conventions</li>
+      <li class="or">Path-specific instructions with glob patterns</li>
+      <li class="or">Org-level instructions now GA (April 2026)</li>
       <li class="or">Works across IDE, Cloud Agent, CLI, and Code Review</li>
-      <li class="or">Use AGENTS.md to scope per agent; .agent.md for custom agent definitions</li>
-      <li class="or">Org-level instructions are <strong>GA</strong> &mdash; enforced for every developer</li>
+      <li class="or">Stack multiple instruction files for different areas of your codebase</li>
     </ul>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions" target="_blank">📖 Custom Instructions Docs</a>
-      <a href="https://github.com/github/awesome-copilot/tree/main/instructions" target="_blank">⭐ awesome-copilot/instructions</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -891,13 +809,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 5 / 18: TIP 04 — Model Selection
+     SLIDE 5 / 14: TIP 04 — Model Selection
      ============================================================ -->
 <div class="slide s-tip04">
   <div class="slide-inner">
@@ -906,13 +824,13 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 04
       </div>
-      <div class="slide-num">5/18</div>
+      <div class="slide-num">5/14</div>
     </div>
 
     <div class="tip-num-badge">🧠</div>
     <span class="tag">Model Selection</span>
     <h2>Pick the right model for the&nbsp;job</h2>
-    <p class="desc">Use the model picker in VS Code, GitHub, or the CLI &mdash; or let <strong>auto</strong> route each task to the best model for you.</p>
+    <p class="desc">Click the model picker in VS Code or on GitHub. Match the model to the task &mdash; each has different strengths and cost multipliers.</p>
 
     <div class="visual-compare">
       <div class="compare-box">
@@ -926,32 +844,30 @@
       <div class="compare-box">
         <h5 style="color:var(--green);">⚡ Fast / Everyday</h5>
         <ul>
-          <li><strong style="color:var(--fg);">auto</strong> &mdash; Copilot picks the best model for the task</li>
           <li><strong style="color:var(--fg);">GPT-5.4 mini</strong> &mdash; fast completions</li>
           <li><strong style="color:var(--fg);">Claude Sonnet 4.5</strong> &mdash; balanced</li>
+          <li><strong style="color:var(--fg);">Gemini Flash</strong> &mdash; high volume, cheap</li>
         </ul>
       </div>
     </div>
 
     <ul class="bullets">
-      <li class="pu"><strong>GPT-5.5 GA</strong> (April 2026) &mdash; latest frontier model available</li>
-      <li class="pu">New <strong>auto</strong> selection routes each turn to the best model automatically</li>
-      <li class="pu"><strong>BYOK</strong> &mdash; bring your own API key for any supported model provider</li>
+      <li class="pu">Switch models mid-conversation anytime in chat</li>
       <li class="pu">Each model has a premium request multiplier (1x&ndash;50x)</li>
-      <li class="pu">⚠️ Usage-based billing starts <strong>June 1, 2026</strong></li>
+      <li class="pu">CLI supports BYOK &amp; local models via Ollama</li>
+      <li class="pu">Cloud Agent defaults to the best available model</li>
     </ul>
 
     <div class="example-box">
       <div class="example-label">💡 Strategy</div>
-      <code>Mixed everyday work &rarr; auto &nbsp;|&nbsp; Architecture &rarr; Claude Opus &nbsp;|&nbsp; New frontier &rarr; GPT-5.5</code>
+      <code>Quick fixes &rarr; GPT-5.4 mini (1x) &nbsp;|&nbsp; Architecture &rarr; Claude Opus (50x) &nbsp;|&nbsp; Bulk tests &rarr; Gemini Flash (0.25x)</code>
     </div>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot/concepts/billing/copilot-requests" target="_blank">📖 Models &amp; Billing</a>
-      <a href="https://github.blog/changelog/2026-04-24-gpt-5-5-is-generally-available-for-github-copilot/" target="_blank">📝 GPT-5.5 GA Announcement</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -961,13 +877,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 6 / 18: TIP 05 — Prompt Files
+     SLIDE 6 / 14: TIP 05 — Prompt Files
      ============================================================ -->
 <div class="slide s-tip05">
   <div class="slide-inner">
@@ -976,21 +892,13 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 05
       </div>
-      <div class="slide-num">6/18</div>
+      <div class="slide-num">6/14</div>
     </div>
 
     <div class="tip-num-badge">📁</div>
     <span class="tag">Prompt Files</span>
     <h2>Create reusable prompt&nbsp;files</h2>
     <p class="desc">Store task-specific prompts as Markdown files. Invoke them with <strong>/</strong> slash command in chat. Shareable across your entire team for consistency.</p>
-
-    <div class="visual-flow">
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">📝 Write .prompt.md</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">/invoke in Chat</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">🔄 Consistent Output</div>
-    </div>
 
     <div class="mono-box">.github/prompts/code-review.prompt.md<br>.github/prompts/add-tests.prompt.md<br>.github/prompts/refactor-to-pattern.prompt.md<br>.github/prompts/deploy-checklist.prompt.md</div>
 
@@ -1014,11 +922,10 @@
     </ul>
 
     <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions" target="_blank">📖 Prompt Files Docs</a>
-      <a href="https://github.com/github/awesome-copilot/tree/main/skills" target="_blank">⭐ awesome-copilot/skills</a>
+      <a href="https://docs.github.com/en/copilot/how-tos/configure-custom-instructions/add-repository-instructions" target="_blank">📖 Custom Instructions &amp; Prompts</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1028,13 +935,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 7 / 18: TIP 06 — MCP Servers
+     SLIDE 7 / 14: TIP 06 — MCP Servers
      ============================================================ -->
 <div class="slide s-tip06">
   <div class="slide-inner">
@@ -1043,13 +950,13 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 06
       </div>
-      <div class="slide-num">7/18</div>
+      <div class="slide-num">7/14</div>
     </div>
 
     <div class="tip-num-badge">🔌</div>
     <span class="tag">MCP Servers</span>
     <h2>Connect external tools via&nbsp;MCP</h2>
-    <p class="desc">Model Context Protocol lets Copilot talk to databases, APIs, Docker, Azure, and GitHub tools mid-conversation &mdash; and the CLI now manages MCP directly.</p>
+    <p class="desc">Model Context Protocol lets Copilot talk to databases, APIs, Docker, Azure, and 50+ integrations mid-conversation. No more copy-pasting context.</p>
 
     <div class="visual-flow">
       <div class="flow-step">💻 Copilot</div>
@@ -1060,32 +967,32 @@
     </div>
 
     <div class="example-box">
-      <div class="example-label">📄 .mcp.json</div>
+      <div class="example-label">📄 .vscode/mcp.json</div>
       <code>
         {<br>
         &nbsp;&nbsp;"servers": {<br>
         &nbsp;&nbsp;&nbsp;&nbsp;"github": { "command": "npx", "args": ["github-mcp-server"] },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;"postgres": { "auth": "client_credentials" }<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;"postgres": { "command": "npx", "args": ["@modelcontextprotocol/server-postgres"] }<br>
         &nbsp;&nbsp;}<br>
         }
       </code>
     </div>
 
     <ul class="bullets">
-      <li class="pk"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--pink);">copilot mcp</code> manages install, auth, and inspection from the CLI</li>
-      <li class="pk">Secret scanning via GitHub MCP Server is now <strong>GA</strong> (May 2026)</li>
-      <li class="pk">Dependency scanning via MCP Server in <strong>public preview</strong></li>
-      <li class="pk">Use <strong>client_credentials</strong> OAuth for headless and CI automation</li>
-      <li class="pk"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--pink);">.mcp.json</code> is now the single source of truth for config</li>
+      <li class="pk">Copilot reads real data from your systems at runtime</li>
+      <li class="pk">Org admins can manage MCP allow-lists for security</li>
+      <li class="pk">Works in VS Code, CLI, and Cloud Agent</li>
+      <li class="pk">GitHub MCP Server: query issues, PRs, repos, and more</li>
+      <li class="pk">50+ community servers: Figma, Slack, Jira, Docker, etc.</li>
     </ul>
 
     <div class="slide-links">
+      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/extend-cloud-agent-with-mcp" target="_blank">📖 MCP with Cloud Agent</a>
       <a href="https://github.com/github/github-mcp-server" target="_blank">🔧 github/github-mcp-server</a>
-      <a href="https://github.com/modelcontextprotocol/servers" target="_blank">🔧 modelcontextprotocol/servers</a>
       <a href="https://docs.github.com/en/copilot/concepts/mcp-management" target="_blank">📖 MCP Governance</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1095,13 +1002,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 8 / 18: TIP 07 — Copilot CLI
+     SLIDE 8 / 14: TIP 07 — Copilot CLI
      ============================================================ -->
 <div class="slide s-tip07">
   <div class="slide-inner">
@@ -1110,38 +1017,38 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 07
       </div>
-      <div class="slide-num">8/18</div>
+      <div class="slide-num">8/14</div>
     </div>
 
     <div class="tip-num-badge">🖥️</div>
     <span class="tag">CLI</span>
     <h2>Copilot CLI &mdash; AI in your terminal</h2>
-    <p class="desc">Run <code style="background:var(--inset);padding:2px 6px;border-radius:4px;color:var(--coral);">copilot</code> from any terminal, then jump between ask, plan, execute, research, and rewind workflows without leaving the shell.</p>
+    <p class="desc">Run <code style="background:var(--inset);padding:2px 6px;border-radius:4px;color:var(--coral);">copilot</code> from any terminal. It reads your repo, makes changes, runs commands, opens PRs &mdash; all with your approval before each step.</p>
 
     <div class="terminal">
-      <span class="dm">$</span> <span class="str">copilot --plan</span><br>
+      <span class="dm">$</span> <span class="str">copilot</span><br>
       <span class="dm">&gt;</span> <span class="str">"Add rate limiting to all API routes and open a PR"</span><br><br>
-      <span class="ok">✓</span> <span class="dm">Created</span> <span class="hl">plan.md</span><br>
-      <span class="ok">✓</span> <span class="dm">Accepted</span> <span class="hl">Autopilot build</span><br>
+      <span class="ok">✓</span> <span class="dm">Analyzed</span> <span class="hl">12 route files</span><br>
+      <span class="ok">✓</span> <span class="dm">Created</span> src/middleware/rate-limit.ts<br>
+      <span class="ok">✓</span> <span class="dm">Updated</span> 12 route files with middleware<br>
       <span class="ok">✓</span> <span class="dm">Ran</span> npm test &mdash; <span class="ok">47/47 passed</span><br>
-      <span class="ok">✓</span> <span class="dm">Checkpointed</span> for <span class="hl">/rewind</span>
+      <span class="ok">✓</span> <span class="dm">Opened</span> PR #42 &mdash; "Add rate limiting middleware"
     </div>
 
     <ul class="bullets">
-      <li class="co"><code style="color:var(--coral);">--plan</code>, <code style="color:var(--coral);">--autopilot</code>, and <code style="color:var(--coral);">--mode</code> jump straight into the workflow you want</li>
-      <li class="co"><code style="color:var(--coral);">/research</code> launches deep read-only investigation from the terminal</li>
-      <li class="co"><code style="color:var(--coral);">/rewind</code> returns to any checkpoint; <code style="color:var(--coral);">/ask</code> handles quick off-record questions</li>
-      <li class="co">Location-based permission persistence remembers trusted folders</li>
-      <li class="co">Generate shell completion with <code style="color:var(--coral);">copilot completion bash|zsh|fish</code></li>
-      <li class="co">MCP servers work in CLI too via the same <code style="color:var(--coral);">.mcp.json</code></li>
+      <li class="co">Interactive mode + programmatic mode with <code style="color:var(--coral);">-p "prompt"</code></li>
+      <li class="co">Plan mode: <strong>Shift+Tab</strong> to preview before execution</li>
+      <li class="co">Supports BYOK and local models (Ollama, LM Studio)</li>
+      <li class="co">MCP servers work in CLI too &mdash; same <code style="color:var(--coral);">.vscode/mcp.json</code></li>
+      <li class="co">Install: <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">gh extension install github/gh-copilot</code></li>
     </ul>
 
     <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 Copilot CLI Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/from-idea-to-pull-request-a-practical-guide-to-building-with-github-copilot-cli/" target="_blank">📝 Idea to PR with CLI</a>
+      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 About Copilot CLI</a>
+      <a href="https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli" target="_blank">📖 Install Guide</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1151,13 +1058,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 9 / 18: TIP 08 — @workspace & Slash Commands
+     SLIDE 9 / 14: TIP 08 — @workspace & Slash Commands
      ============================================================ -->
 <div class="slide s-tip08">
   <div class="slide-inner">
@@ -1166,7 +1073,7 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 08
       </div>
-      <div class="slide-num">9/18</div>
+      <div class="slide-num">9/14</div>
     </div>
 
     <div class="tip-num-badge">🔍</div>
@@ -1174,51 +1081,48 @@
     <h2>Master @workspace, @terminal, and slash&nbsp;commands</h2>
     <p class="desc">Give Copilot full repo context with <strong>@workspace</strong>. Use <strong>@terminal</strong> for CLI debug. Fire off instant actions with slash commands.</p>
 
-    <div class="visual-compare">
-      <div class="compare-box">
-        <h5 style="color:var(--yellow);">📎 Context Providers</h5>
-        <ul>
-          <li><span style="color:var(--yellow);">@workspace</span> &mdash; full repo</li>
-          <li><span style="color:var(--yellow);">@terminal</span> &mdash; shell output</li>
-          <li><span style="color:var(--yellow);">#file</span> &mdash; specific file</li>
-          <li><span style="color:var(--yellow);">#codebase</span> &mdash; search all</li>
-        </ul>
-      </div>
-      <div class="compare-box">
-        <h5 style="color:var(--green);">⚡ Slash Commands</h5>
-        <ul>
-          <li><span style="color:var(--green);">/fix</span> &mdash; auto-fix code</li>
-          <li><span style="color:var(--green);">/tests</span> &mdash; generate tests</li>
-          <li><span style="color:var(--green);">/explain</span> &mdash; plain English</li>
-          <li><span style="color:var(--green);">/doc</span> &mdash; add JSDoc</li>
-        </ul>
-      </div>
+    <div class="mono-box" style="font-size: 15px; line-height: 1.85;">
+      <span style="color:var(--yellow);">@workspace</span> <span style="color:var(--muted);">"how does auth work in this repo?"</span><br>
+      <span style="color:var(--yellow);">@terminal</span> <span style="color:var(--muted);">"why did that test fail?"</span><br>
+      <span style="color:var(--green);">/fix</span> <span style="color:var(--muted);">&rarr; auto-fixes selected code</span><br>
+      <span style="color:var(--green);">/tests</span> <span style="color:var(--muted);">&rarr; generates unit tests for selection</span><br>
+      <span style="color:var(--green);">/explain</span> <span style="color:var(--muted);">&rarr; explains code in plain English</span><br>
+      <span style="color:var(--green);">/doc</span> <span style="color:var(--muted);">&rarr; adds JSDoc / docstring</span>
     </div>
 
     <ul class="bullets">
       <li class="yl"><code style="color:var(--yellow);">#file</code> &mdash; attach specific files as context</li>
+      <li class="yl"><code style="color:var(--yellow);">#selection</code> &mdash; reference your current editor selection</li>
       <li class="yl"><code style="color:var(--yellow);">#codebase</code> &mdash; search the entire project for relevant context</li>
       <li class="yl">Combine: <code style="color:var(--yellow);">@workspace #file:schema.ts</code> "add validation for the User model"</li>
-      <li class="yl">🦆 <strong>Rubber duck</strong>: use Ask mode to think out loud &mdash; Copilot challenges your logic</li>
     </ul>
 
     <div class="example-box">
-      <div class="example-label">🦆 Rubber Duck Debugging</div>
-      <code>"I think this race condition happens because the mutex isn't held during the callback. Am I wrong?" &mdash; Copilot spots the flaw you missed</code>
+      <div class="example-label">💡 Power Combo</div>
+      <code>Select a function &rarr; press <strong>Cmd+I</strong> &rarr; type "/tests" &rarr; instant test file with edge cases</code>
     </div>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot" target="_blank">📖 Copilot Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-combines-model-families-for-a-second-opinion/" target="_blank">🦆 Rubber Duck Blog Post</a>
     </div>
 
-        <div class="branding-footer"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="branding-footer">
+      <span class="author">Shailesh Mishra</span>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
+        <a href="https://twitter.com/sendtoshailesh" target="_blank">𝕏 @sendtoshailesh</a>
+        <a href="https://instagram.com/sendtoshailesh" target="_blank">📷 @sendtoshailesh</a>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 10 / 18: TIP 09 — PR Code Review
+     SLIDE 10 / 14: TIP 09 — PR Code Review
      ============================================================ -->
 <div class="slide s-tip09">
   <div class="slide-inner">
@@ -1227,7 +1131,7 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 09
       </div>
-      <div class="slide-num">10/18</div>
+      <div class="slide-num">10/14</div>
     </div>
 
     <div class="tip-num-badge">📝</div>
@@ -1250,7 +1154,7 @@
       <li class="rd">Suggests concrete code fixes, not just warnings</li>
       <li class="rd">Customize rules with <code style="color:var(--red);">.github/copilot-instructions.md</code></li>
       <li class="rd">Enable automatic reviews for all PRs in repo settings</li>
-      <li class="rd">⚠️ Code review will consume <strong>Actions minutes</strong> starting June 1</li>
+      <li class="rd">Review comments are actionable &mdash; click to apply fixes</li>
     </ul>
 
     <div class="example-box">
@@ -1259,11 +1163,10 @@
     </div>
 
     <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review" target="_blank">📖 Code Review Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/60-million-copilot-code-reviews-and-counting/" target="_blank">📝 60M Code Reviews Blog</a>
+      <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review" target="_blank">📖 Copilot Code Review Docs</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1273,13 +1176,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 11 / 18: TIP 10 — Agent Skills & Extensions
+     SLIDE 11 / 14: TIP 10 — Agent Skills & Extensions
      ============================================================ -->
 <div class="slide s-tip10">
   <div class="slide-inner">
@@ -1288,58 +1191,55 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 10
       </div>
-      <div class="slide-num">11/18</div>
+      <div class="slide-num">11/14</div>
     </div>
 
     <div class="tip-num-badge">🧰</div>
-    <span class="tag">Skills &middot; Plugins &middot; Extensions</span>
-    <h2>Extend Copilot with skills, plugins &amp;&nbsp;community</h2>
-    <p class="desc">Copilot is a platform. Skills add domain knowledge, plugins connect external tools, custom agents chain workflows &mdash; and the community has already built hundreds.</p>
+    <span class="tag">SDK &middot; Skills &middot; Extensions</span>
+    <h2>Build with Agent Skills &amp;&nbsp;Extensions</h2>
+    <p class="desc">Copilot is a platform, not just a tool. Create custom agent skills, VS Code chat participants, and internal developer tools that plug into the Copilot ecosystem.</p>
 
     <div class="visual-compare">
       <div class="compare-box">
-        <h5 style="color:var(--teal);">🛠️ Skills &amp; Plugins</h5>
+        <h5 style="color:var(--teal);">🛠️ Agent Skills</h5>
         <ul>
-          <li>Built-in skills ship with CLI + IDE</li>
-          <li>MCP servers = live tool plugins</li>
-          <li>VS Code extensions add Copilot tools</li>
-          <li>GitHub Apps extend Cloud Agent</li>
+          <li>Custom instructions + scripts</li>
+          <li>Enhance Cloud Agent abilities</li>
+          <li>Manage via <code style="color:var(--teal);">gh copilot skill</code></li>
+          <li>Workspace or user-level scoping</li>
         </ul>
       </div>
       <div class="compare-box">
-        <h5 style="color:var(--teal);">🧩 Custom Agents</h5>
+        <h5 style="color:var(--teal);">🧩 Copilot Extensions</h5>
         <ul>
-          <li>Declare <code style="color:var(--teal);">skills</code> field in .agent.md</li>
-          <li>Chain agents for multi-step flows</li>
-          <li>Manage with <code style="color:var(--teal);">gh copilot skill</code></li>
-          <li>Share across your org</li>
+          <li>VS Code extensions with AI</li>
+          <li>Custom chat participants (@your-tool)</li>
+          <li>GitHub Apps with Copilot API</li>
+          <li>Marketplace distribution</li>
         </ul>
       </div>
     </div>
 
     <div class="example-box">
-      <div class="example-label">⭐ awesome-copilot</div>
+      <div class="example-label">📁 Skill File Structure</div>
       <code>
-        github.com/github/awesome-copilot &mdash; curated collection of:<br>
-        &bull; Custom agents &bull; Skills &bull; Instructions &bull; Prompt files &bull; MCP configs<br>
-        Browse &rarr; copy &rarr; customize for your team
+        .copilot/skills/my-skill/SKILL.md &nbsp;&nbsp;&nbsp;# Skill instructions<br>
+        .copilot/agents/my-agent.agent.md &nbsp;# Agent definition<br>
+        .copilot/instructions.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Workspace config
       </code>
     </div>
 
     <ul class="bullets">
-      <li class="tl">Use <strong>awesome-copilot</strong> repo for ready-made agents, skills, and instructions</li>
-      <li class="tl">MCP servers act as live plugins: databases, cloud, monitoring, security</li>
-      <li class="tl">VS Code extensions like Azure, Docker, and Terraform add Copilot-native tools</li>
-      <li class="tl">Skills are reusable across CLI, IDE, and ACP-compatible clients</li>
+      <li class="tl">Create specialized agents for your team's workflows</li>
+      <li class="tl">Skills run locally or in Cloud Agent sandbox</li>
+      <li class="tl">Chain agents together for multi-step pipelines</li>
     </ul>
 
     <div class="slide-links">
-      <a href="https://github.com/github/awesome-copilot" target="_blank">⭐ github/awesome-copilot</a>
       <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/add-skills" target="_blank">📖 Agent Skills Docs</a>
-      <a href="https://github.com/github/awesome-copilot/tree/main/plugins" target="_blank">🔌 awesome-copilot/plugins</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1349,13 +1249,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 12 / 18: TIP 11 — Enterprise Governance
+     SLIDE 12 / 14: TIP 11 — Enterprise Governance
      ============================================================ -->
 <div class="slide s-tip11">
   <div class="slide-inner">
@@ -1364,40 +1264,40 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 11
       </div>
-      <div class="slide-num">12/18</div>
+      <div class="slide-num">12/14</div>
     </div>
 
     <div class="tip-num-badge">🏢</div>
     <span class="tag">Enterprise</span>
     <h2>Configure org-level governance</h2>
-    <p class="desc">Granular enterprise controls now cover Cloud Agent, model access, MCP, audit logs, hooks, and smarter permission persistence. Power without governance is chaos.</p>
+    <p class="desc">Granular enterprise controls for Cloud Agent, model access, MCP servers, data residency, and audit logging. Power without governance is chaos.</p>
 
     <div class="example-box">
       <div class="example-label">🔒 Governance Checklist</div>
       <code>
         ✅ Set org-level Copilot instructions (enforced for all repos)<br>
-        ✅ Configure HTTP hooks that POST JSON to internal URLs<br>
-        ✅ Use preToolUse hooks to approve or deny actions programmatically<br>
+        ✅ Configure Cloud Agent runner settings (self-hosted / GitHub-hosted)<br>
         ✅ Define MCP server allow-lists per organization<br>
-        ✅ Enable audit logs and route them into SIEM tools<br>
-        ✅ Persist approvals by location for trusted folders
+        ✅ Set firewall rules for agent network access<br>
+        ✅ Enable audit logs for all Copilot activity<br>
+        ✅ Configure data residency (US / EU &mdash; FedRAMP compliant)
       </code>
     </div>
 
     <ul class="bullets">
-      <li class="or">Agent sandbox <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--orange);">allowNetwork</code> mode &mdash; network without full sandbox off</li>
-      <li class="or">Data residency in US + EU &mdash; FedRAMP-authorized models available</li>
-      <li class="or">OpenTelemetry tracing: monitor agent token usage and latency</li>
-      <li class="or">MCP registry-based allowlists per organization</li>
-      <li class="or">preToolUse hooks can allow, block, or escalate actions automatically</li>
+      <li class="or">Org runner controls for Cloud Agent (April 2026)</li>
+      <li class="or">Model access policies: allow/deny specific models per org</li>
+      <li class="or">Custom properties for fine-grained repo-level Copilot settings</li>
+      <li class="or">Audit log integration with SIEM tools</li>
+      <li class="or">IP allow-listing for Copilot API access</li>
     </ul>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/configuring-agent-settings" target="_blank">📖 Agent Settings</a>
-      <a href="https://github.com/github/awesome-copilot/tree/main/hooks" target="_blank">🪩 awesome-copilot/hooks</a>
+      <a href="https://docs.github.com/en/copilot/concepts/mcp-management" target="_blank">📖 MCP Management</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1407,13 +1307,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 13 / 18: TIP 12 — Repo = Brain
+     SLIDE 13 / 14: TIP 12 — Repo = Brain
      ============================================================ -->
 <div class="slide s-tip12">
   <div class="slide-inner">
@@ -1422,7 +1322,7 @@
         <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Tip 12
       </div>
-      <div class="slide-num">13/18</div>
+      <div class="slide-num">13/14</div>
     </div>
 
     <div class="tip-num-badge">🔄</div>
@@ -1472,10 +1372,9 @@
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot" target="_blank">📖 Copilot Best Practices</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/agent-driven-development-in-copilot-applied-science/" target="_blank">📝 Agent-Driven Development</a>
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1485,291 +1384,13 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     SLIDE 14 / 18: TIP 13 — /research
-     ============================================================ -->
-<div class="slide s-tip13">
-  <div class="slide-inner">
-    <div class="top-bar">
-      <div class="brand">
-        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        Tip 13
-      </div>
-      <div class="slide-num">14/18</div>
-    </div>
-
-    <div class="tip-num-badge">🔬</div>
-    <span class="tag">Research Mode</span>
-    <h2>/research &mdash; deep investigation mode</h2>
-    <p class="desc">When normal chat is too shallow, <strong>/research</strong> launches multiple subagents, gathers evidence, and returns a Markdown report before you touch implementation.</p>
-
-    <div class="visual-flow">
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">🔬 /research</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">4 Sub-agents</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">📝 MD Report</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">🌐 /share html</div>
-    </div>
-
-    <div class="terminal">
-      <span class="dm">$</span> <span class="str">/research "How does auth work in this repo?"</span><br><br>
-      <span class="ok">✓</span> Spawned <span class="hl">4 research agents</span><br>
-      <span class="ok">✓</span> Wrote <span class="hl">research/auth-flow.md</span><br>
-      <span class="ok">✓</span> Added citations + <span class="hl">Mermaid diagram</span><br>
-      <span class="ok">✓</span> Logged assumptions and confidence levels<br>
-      <span class="ok">✓</span> <span class="hl">/share html research</span> ready to export
-    </div>
-
-    <ul class="bullets">
-      <li class="cy">Spawns multi-subagent research jobs with Markdown reports + Mermaid diagrams</li>
-      <li class="cy">Export the findings as HTML with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--cyan);">/share html research</code></li>
-      <li class="cy">Autonomous: never asks questions, makes assumptions, documents confidence</li>
-      <li class="cy">Read-only: investigates deeply but never edits files</li>
-      <li class="cy">Use it <strong>before planning</strong> to gather intelligence first</li>
-      <li class="cy">Trigger format: <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--cyan);">/research TOPIC</code></li>
-    </ul>
-
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 Copilot CLI Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/run-multiple-agents-at-once-with-fleet-in-copilot-cli/" target="_blank">📝 /fleet Multi-Agent Blog</a>
-    </div>
-
-        <div class="branding-footer">
-      <span class="author">Shailesh Mishra</span>
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
-        <a href="https://twitter.com/sendtoshailesh" target="_blank">𝕏 @sendtoshailesh</a>
-        <a href="https://instagram.com/sendtoshailesh" target="_blank">📷 @sendtoshailesh</a>
-      </div>
-    </div>
-
-    <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     SLIDE 15 / 18: TIP 14 — Plan → Autopilot Workflow
-     ============================================================ -->
-<div class="slide s-tip14">
-  <div class="slide-inner">
-    <div class="top-bar">
-      <div class="brand">
-        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        Tip 14
-      </div>
-      <div class="slide-num">15/18</div>
-    </div>
-
-    <div class="tip-num-badge">🗺️</div>
-    <span class="tag">Plan &middot; Autopilot</span>
-    <h2>Plan &rarr; approve &rarr; let Autopilot build</h2>
-    <p class="desc">The recommended CLI flow now formalizes planning first, then hands execution to Autopilot after you approve the path forward.</p>
-
-    <div class="visual-flow">
-      <div class="flow-step">🔎 Explore</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--pink);color:var(--pink);">📝 Plan</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step accent-green">✅ Approve</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step">🤖 Autopilot builds</div>
-    </div>
-
-    <ul class="bullets">
-      <li class="pk">Shift+Tab cycles Ask/Execute &rarr; Plan &rarr; Autopilot</li>
-      <li class="pk">Start directly with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--pink);">--plan</code></li>
-      <li class="pk">Plan mode asks questions and creates a structured <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--pink);">plan.md</code></li>
-      <li class="pk">Approve with <strong>“Accept and build on autopilot”</strong></li>
-      <li class="pk">Autopilot continues for 5 messages by default; tune with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--pink);">--max-autopilot-continues</code></li>
-      <li class="pk">A critic agent can review plans with a complementary model</li>
-    </ul>
-
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 CLI Workflow Docs</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-for-beginners-interactive-v-non-interactive-mode/" target="_blank">📝 CLI Modes for Beginners</a>
-    </div>
-
-        <div class="branding-footer">
-      <span class="author">Shailesh Mishra</span>
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
-        <a href="https://twitter.com/sendtoshailesh" target="_blank">𝕏 @sendtoshailesh</a>
-        <a href="https://instagram.com/sendtoshailesh" target="_blank">📷 @sendtoshailesh</a>
-      </div>
-    </div>
-
-    <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     SLIDE 16 / 18: TIP 15 — Remote Sessions & /chronicle
-     ============================================================ -->
-<div class="slide s-tip15">
-  <div class="slide-inner">
-    <div class="top-bar">
-      <div class="brand">
-        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        Tip 15
-      </div>
-      <div class="slide-num">16/18</div>
-    </div>
-
-    <div class="tip-num-badge">📡</div>
-    <span class="tag">Remote &middot; Chronicle</span>
-    <h2>Remote sessions &amp;&nbsp;/chronicle</h2>
-    <p class="desc">Start in your terminal, continue from GitHub.com or mobile, then turn session history into standups and improvement ideas with <strong>/chronicle</strong>.</p>
-
-    <div class="visual-flow">
-      <div class="flow-step" style="border-color:var(--coral);color:var(--coral);">💻 Terminal</div>
-      <div class="flow-arrow">&harr;</div>
-      <div class="flow-step" style="border-color:var(--coral);color:var(--coral);">🌐 GitHub.com</div>
-      <div class="flow-arrow">&harr;</div>
-      <div class="flow-step" style="border-color:var(--coral);color:var(--coral);">📱 Mobile</div>
-    </div>
-
-    <div class="terminal">
-      <span class="dm">$</span> <span class="str">copilot --remote</span><br>
-      <span class="dm">&gt;</span> <span class="str">/remote on</span><br>
-      <span class="dm">&gt;</span> <span class="str">/chronicle</span><br>
-      <span class="dm">&gt;</span> <span class="str">&amp; "summarize open bugs in the background"</span>
-    </div>
-
-    <ul class="bullets">
-      <li class="co">Start a session locally, then continue from GitHub.com or mobile</li>
-      <li class="co">Use <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">--remote</code> at launch or <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">/remote on</code> mid-session</li>
-      <li class="co"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">/chronicle</code> generates standup summaries, tips, and improvement suggestions</li>
-      <li class="co">Remote sessions are now available to all users</li>
-      <li class="co">Prefix prompts with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">&amp;</code> to delegate work in the background</li>
-    </ul>
-
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 Remote Sessions Docs</a>
-      <a href="https://github.blog/changelog/2026-04-13-remote-control-cli-sessions-on-web-and-mobile-in-public-preview/" target="_blank">📝 Remote Control Changelog</a>
-    </div>
-
-        <div class="branding-footer">
-      <span class="author">Shailesh Mishra</span>
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
-        <a href="https://twitter.com/sendtoshailesh" target="_blank">𝕏 @sendtoshailesh</a>
-        <a href="https://instagram.com/sendtoshailesh" target="_blank">📷 @sendtoshailesh</a>
-      </div>
-    </div>
-
-    <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     SLIDE 17 / 18: TIP 16 — Modes Mastery
-     ============================================================ -->
-<div class="slide s-tip16">
-  <div class="slide-inner">
-    <div class="top-bar">
-      <div class="brand">
-        <svg width="22" height="22" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        Tip 16
-      </div>
-      <div class="slide-num">17/18</div>
-    </div>
-
-    <div class="tip-num-badge">🧭</div>
-    <span class="tag">Modes &middot; Strategy</span>
-    <h2>Master all 5 modes &mdash; know when to use each</h2>
-    <p class="desc">Most users live in one mode. Power users <strong>switch between all five</strong> depending on the task. Each mode has a distinct purpose &mdash; use the right one for the job.</p>
-
-    <div class="visual-flow" style="margin-bottom:8px;">
-      <div class="flow-step" style="border-color:var(--cyan);color:var(--cyan);">🔬 Research</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--blue);color:var(--blue);">💬 Ask</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--pink);color:var(--pink);">📝 Plan</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--green);color:var(--green);">🤖 Agent</div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-step" style="border-color:var(--orange);color:var(--orange);">⚡ Autopilot</div>
-    </div>
-
-    <div class="modes-grid">
-      <div class="mode-card">
-        <div class="mode-icon">💬</div>
-        <div class="mode-name" style="color:var(--blue);">Ask</div>
-        <div class="mode-when">Quick Q&amp;A, off-record questions, no file edits</div>
-        <div class="mode-key" style="background:rgba(88,166,255,0.1);color:var(--blue);">/ask or Shift+Tab</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-icon">📝</div>
-        <div class="mode-name" style="color:var(--pink);">Plan</div>
-        <div class="mode-when">Asks questions, writes plan.md, critic agent reviews</div>
-        <div class="mode-key" style="background:rgba(247,120,186,0.1);color:var(--pink);">--plan or Shift+Tab</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-icon">🤖</div>
-        <div class="mode-name" style="color:var(--green);">Agent</div>
-        <div class="mode-when">Autonomous IDE edits, multi-file, self-corrects</div>
-        <div class="mode-key" style="background:rgba(63,185,80,0.1);color:var(--green);">Default in VS Code</div>
-      </div>
-    </div>
-    <div class="modes-grid row-2">
-      <div class="mode-card">
-        <div class="mode-icon">⚡</div>
-        <div class="mode-name" style="color:var(--orange);">Autopilot</div>
-        <div class="mode-when">Approve plan &rarr; runs unattended, 5-msg default</div>
-        <div class="mode-key" style="background:rgba(210,153,34,0.1);color:var(--orange);">--autopilot or Shift+Tab</div>
-      </div>
-      <div class="mode-card">
-        <div class="mode-icon">🔬</div>
-        <div class="mode-name" style="color:var(--cyan);">Research</div>
-        <div class="mode-when">Deep investigation, multi-agent, read-only reports</div>
-        <div class="mode-key" style="background:rgba(118,227,234,0.1);color:var(--cyan);">/research TOPIC</div>
-      </div>
-    </div>
-
-    <ul class="bullets" style="margin-top:12px;">
-      <li class="yl"><strong>Shift+Tab</strong> cycles Ask &rarr; Plan &rarr; Autopilot in the CLI</li>
-      <li class="yl">Use <strong>Ask</strong> for quick lookups that shouldn&rsquo;t pollute context</li>
-      <li class="yl">Use <strong>Plan</strong> before complex work &mdash; the critic agent catches flaws early</li>
-      <li class="yl">Use <strong>Agent</strong> for hands-on coding with iterative self-correction</li>
-      <li class="yl">Use <strong>Autopilot</strong> after approving a plan &mdash; it builds while you review</li>
-      <li class="yl">Use <strong>Research</strong> before everything else to gather intelligence first</li>
-    </ul>
-
-    <div class="slide-links">
-      <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli" target="_blank">📖 Copilot CLI Modes</a>
-      <a href="https://github.blog/ai-and-ml/github-copilot/github-copilot-cli-for-beginners-getting-started-with-github-copilot-cli/" target="_blank">📝 CLI Getting Started Blog</a>
-    </div>
-
-        <div class="branding-footer">
-      <span class="author">Shailesh Mishra</span>
-      <div class="socials">
-        <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
-        <a href="https://twitter.com/sendtoshailesh" target="_blank">𝕏 @sendtoshailesh</a>
-        <a href="https://instagram.com/sendtoshailesh" target="_blank">📷 @sendtoshailesh</a>
-      </div>
-    </div>
-
-    <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div><div class="dot"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ============================================================
-     SLIDE 18 / 18: CTA
+     SLIDE 14 / 14: CTA
      ============================================================ -->
 <div class="slide s-cta">
   <div class="slide-inner">
@@ -1778,24 +1399,17 @@
         <svg width="28" height="28" viewBox="0 0 16 16" fill="#fff"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         GitHub Copilot
       </div>
-      <div class="slide-num">18/18</div>
+      <div class="slide-num">14/14</div>
     </div>
 
     <h1>Stop using Copilot like&nbsp;autocomplete.</h1>
-    <p class="desc">These 16 tips cover Agent Mode, Cloud Agent, custom instructions, model selection, prompt files, MCP, CLI, slash commands, code review, skills, governance, repo context, /research, Plan &rarr; Autopilot, remote sessions, and modes mastery.</p>
-
-    <div class="mono-box" style="max-width:780px;margin:8px auto 14px;text-align:left;color:var(--fg);">
-      01 Agent Mode &middot; 02 Cloud Agent &middot; 03 Custom Instructions &middot; 04 Model Selection &middot; 05 Prompt Files<br>
-      06 MCP Servers &middot; 07 CLI &middot; 08 @workspace &amp; Slash Commands &middot; 09 Code Review &middot; 10 Skills &amp; Extensions<br>
-      11 Governance &middot; 12 Repo Context &middot; 13 /research &middot; 14 Plan &rarr; Autopilot &middot; 15 Remote Sessions<br>
-      16 Modes Mastery &mdash; Ask vs Plan vs Agent vs Autopilot vs Research
-    </div>
+    <p class="desc">These 12 features separate the top 1% from everyone else. The gap is only getting wider.</p>
 
     <div class="cta-actions">
       <a class="cta-btn" href="https://sendtoshailesh.github.io/copilot-cheatsheet/How-To-GitHub-Copilot-Better-Than-99.html" target="_blank">Full Cheatsheet &rarr;</a>
-      <p class="engage-text">♻️ <strong>Repost</strong> if your network needs these 16 tips</p>
-      <p class="engage-text">💾 <strong>Save</strong> this May 2026 update for later</p>
-      <p class="engage-text">💬 <strong>Comment</strong> which tip was brand new to you</p>
+      <p class="engage-text">&#x267B;&#xFE0F; <strong>Repost</strong> if your network needs to see this</p>
+      <p class="engage-text">&#x1F4BE; <strong>Save</strong> this carousel for later</p>
+      <p class="engage-text">&#x1F4AC; <strong>Comment</strong> which tip was new to you</p>
     </div>
 
     <div class="cta-connect">
@@ -1811,7 +1425,7 @@
       #GitHubCopilot &nbsp; #AI &nbsp; #DeveloperProductivity &nbsp; #CopilotAgent &nbsp; #SoftwareEngineering &nbsp; #DevTools &nbsp; #GitHub
     </div>
 
-        <div class="branding-footer">
+    <div class="branding-footer">
       <span class="author">Shailesh Mishra</span>
       <div class="socials">
         <a href="https://www.linkedin.com/in/shaileshmishra1/" target="_blank">🔗 LinkedIn</a>
@@ -1821,9 +1435,10 @@
     </div>
 
     <div class="progress">
-      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div>
+      <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot current"></div>
     </div>
   </div>
 </div>
+
 </body>
 </html>

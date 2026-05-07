@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const SLIDE_W = 1080;
 const SLIDE_H = 1350;
-const TOTAL_SLIDES = 14;
+const TOTAL_SLIDES = 17;
 const DPR = 2; // retina
 
 (async () => {

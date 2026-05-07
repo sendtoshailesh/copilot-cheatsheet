@@ -1,6 +1,8 @@
 𝟵𝟵% 𝗼𝗳 𝗱𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿𝘀 𝗮𝗿𝗲 𝘂𝘀𝗶𝗻𝗴 𝗚𝗶𝘁𝗛𝘂𝗯 𝗖𝗼𝗽𝗶𝗹𝗼𝘁 𝘄𝗿𝗼𝗻𝗴.
 
-I compiled 12 tips into a 14-slide visual carousel — with real examples, inline code, terminal mockups, and official GitHub Docs links on every slide.
+I compiled 15 tips into a 17-slide visual carousel — with real examples, inline code, terminal mockups, and official GitHub Docs links on every slide.
+
+🆕 𝗠𝗮𝘆 𝟮𝟬𝟮𝟲 𝘂𝗽𝗱𝗮𝘁𝗲 — 3 new tips + major updates to 5 existing ones.
 
 Here's what's inside ↓
 
@@ -9,15 +11,18 @@ Here's what's inside ↓
 𝟭. Switch to Agent Mode — stop using plain chat
 𝟮. Assign issues directly to Copilot
 𝟯. Add custom instructions — once
-𝟰. Pick the right model for the job
+𝟰. Pick the right model for the job (🆕 auto mode)
 𝟱. Create reusable prompt files
-𝟲. Connect external tools via MCP
-𝟳. Copilot CLI — AI in your terminal
+𝟲. Connect external tools via MCP (🆕 copilot mcp CLI)
+𝟳. Copilot CLI — AI in your terminal (🆕 /research, /rewind, /ask)
 𝟴. Master @workspace, @terminal, and slash commands
 𝟵. Let Copilot review your pull requests
-𝟭𝟬. Build with Agent Skills & Extensions
-𝟭𝟭. Configure org-level governance
+𝟭𝟬. Build with Agent Skills & Extensions (🆕 built-in skills)
+𝟭𝟭. Configure org-level governance (🆕 HTTP hooks)
 𝟭𝟮. Your repo IS Copilot's brain
+🆕 𝟭𝟯. /research — Deep Investigation Mode
+🆕 𝟭𝟰. Plan → Autopilot Workflow
+🆕 𝟭𝟱. Remote Sessions & /chronicle
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
@@ -31,4 +36,4 @@ Here's what's inside ↓
 🔗 Full interactive cheatsheet:
 https://sendtoshailesh.github.io/copilot-cheatsheet/How-To-GitHub-Copilot-Better-Than-99.html
 
-#GitHubCopilot #AI #DeveloperProductivity #CopilotTips #GitHub
+#GitHubCopilot #AI #DeveloperProductivity #CopilotTips #CopilotCLI #GitHub

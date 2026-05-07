@@ -15,17 +15,18 @@
 ## Carousel Conventions
 
 - **Format**: 1080×1350px, 4:5 portrait, GitHub dark theme
-- **Slide count**: 14 (cover + 12 tips + CTA)
+- **Slide count**: 18 (cover + 16 tips + CTA)
 - **No QR codes** — use plain-text hyperlinks only
 - **Branding footer** on every slide with author name + social links
 - **Content density**: fill 85-90% of vertical space per tip slide
 - **PDF export**: `node capture-carousel.js` (Puppeteer, 2x DPR)
+- **Max slides**: 20 (LinkedIn PDF page limit) — consolidate before exceeding
 
 ## Design System
 
 - Font: Inter (Google Fonts)
 - Background: #0d1117 (GitHub dark)
-- Accent colors rotate per tip: blue → green → orange → purple → cyan → pink → coral → yellow → red → teal → orange → blue
+- Accent colors rotate per tip: blue → green → orange → purple → cyan → pink → coral → yellow → red → teal → orange → blue → cyan → pink → coral → yellow
 
 ## File Naming
 
@@ -37,8 +38,18 @@
 
 ## Pipeline
 
+### New Content Creation (`@content-pipeline`)
+
 1. Research URLs → `content-researcher` skill
 2. Generate HTML → `linkedin-carousel-generator` skill
 3. Export PDF → `pdf-exporter` skill (runs `capture-carousel.js`)
 4. Draft post → `social-post-drafter` skill
 5. Push to GitHub Pages → `git add . && git commit && git push`
+
+### Content Enhancement (`@content-enhancer`)
+
+1. Monitor features → `copilot-feature-tracker` skill
+2. Inventory → update `feature-inventory.md`
+3. Gap-analyze → compare inventory vs content
+4. Spec → generate update spec
+5. Apply → modify HTML, update dots/counters, export PDF, draft post
