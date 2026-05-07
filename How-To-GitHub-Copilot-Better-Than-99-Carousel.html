@@ -734,9 +734,12 @@
       <li class="bl"><strong>Ask</strong> &mdash; quick lookups, explain code, off-record questions that don&rsquo;t pollute context</li>
       <li class="bl"><strong>Plan</strong> &mdash; use before complex work; the critic agent catches design flaws early</li>
       <li class="bl"><strong>Agent</strong> &mdash; hands-on coding with iterative self-correction across files</li>
-      <li class="bl"><strong>Autopilot</strong> &mdash; approve a plan, then it builds unattended (5-message default)</li>
-      <li class="bl"><strong>/research</strong> &mdash; spawns multi-agent investigation with read-only Markdown reports</li>
     </ul>
+
+    <div class="example-box">
+      <div class="example-label">🎬 Real-World: Adding Stripe Payments</div>
+      <code>💬 Ask: "Explain how our checkout flow works"<br>📝 Plan: "Add Stripe subscription billing" &rarr; plan.md with 8 steps<br>🤖 Agent: Implements all 8 steps, creates tests, runs them<br>⚡ Autopilot: Approved plan &rarr; builds the remaining 3 services unattended</code>
+    </div>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot" target="_blank">📖 Copilot Docs</a>
@@ -803,8 +806,12 @@
       <li class="gr">Open any issue &rarr; Assignees &rarr; select <strong>Copilot</strong></li>
       <li class="gr">Runs your existing <strong>GitHub Actions</strong> workflows (lint, test, build, deploy)</li>
       <li class="gr">Manage sessions from Issues, Projects, or <strong>GitHub Mobile</strong></li>
-      <li class="gr">Add <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--green);">copilot:agent</code> label to auto-assign future issues</li>
     </ul>
+
+    <div class="example-box">
+      <div class="example-label">🎬 Real-World: Bug Fix at 2 AM</div>
+      <code>Issue #412: "Login fails when email has + sign"<br>🤖 Copilot assigned &rarr; fixes regex in auth.ts &rarr; adds 3 test cases<br>⚙️ Actions CI: lint ✓ test ✓ build ✓ &rarr; PR #413 ready for morning review</code>
+    </div>
 
     <div class="slide-links">
       <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent" target="_blank">📖 Cloud Agent Guide</a>
@@ -946,8 +953,8 @@
     </ul>
 
     <div class="example-box">
-      <div class="example-label">💡 Strategy</div>
-      <code>Mixed everyday work &rarr; auto &nbsp;|&nbsp; Architecture &rarr; Claude Opus &nbsp;|&nbsp; New frontier &rarr; GPT-5.5</code>
+      <div class="example-label">🎬 Real-World: E-commerce Team</div>
+      <code>Search page fix &rarr; auto (routes to GPT-5.4 mini, 1x) &mdash; done in seconds<br>Payment refactor &rarr; Claude Opus 4.7 (50x) &mdash; understands complex state<br>API docs for 30 endpoints &rarr; GPT-5.5 (8x) &mdash; fast + high quality</code>
     </div>
 
     <div class="slide-links">
@@ -1064,14 +1071,15 @@
     </div>
 
     <div class="example-box">
-      <div class="example-label">📄 .mcp.json</div>
+      <div class="example-label">🎬 Real-World: DevOps Dashboard</div>
       <code>
         {<br>
         &nbsp;&nbsp;"servers": {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;"github": { "command": "npx", "args": ["github-mcp-server"] },<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;"postgres": { "auth": "client_credentials" }<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;"github": { "type": "http", "url": "https://api.githubcopilot.com/mcp/" },<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;"postgres": { "command": "npx", "args": ["@mcp/server-postgres", "$DB_URL"] }<br>
         &nbsp;&nbsp;}<br>
-        }
+        }<br>
+        Agent queries live DB &rarr; "Show me users who signed up this week but never logged in"
       </code>
     </div>
 
@@ -1125,10 +1133,14 @@
     <div class="terminal">
       <span class="dm">$</span> <span class="str">copilot --plan</span><br>
       <span class="dm">&gt;</span> <span class="str">"Add rate limiting to all API routes and open a PR"</span><br><br>
-      <span class="ok">✓</span> <span class="dm">Created</span> <span class="hl">plan.md</span><br>
+      <span class="ok">✓</span> <span class="dm">Created</span> <span class="hl">plan.md</span> &mdash; 6 steps<br>
       <span class="ok">✓</span> <span class="dm">Accepted</span> <span class="hl">Autopilot build</span><br>
-      <span class="ok">✓</span> <span class="dm">Ran</span> npm test &mdash; <span class="ok">47/47 passed</span><br>
-      <span class="ok">✓</span> <span class="dm">Checkpointed</span> for <span class="hl">/rewind</span>
+      <span class="ok">✓</span> <span class="dm">Ran</span> npm test &mdash; <span class="ok">47/47 passed</span>
+    </div>
+
+    <div class="example-box">
+      <div class="example-label">🎬 Real-World: Migrating Express to Fastify</div>
+      <code>$ copilot --plan "Migrate our Express API to Fastify"<br>📝 Plan asks: "Keep middleware? Migrate tests? Update Docker?"<br>🧐 Critic agent flags: "Missing error handling for streaming routes"<br>✅ Approve &rarr; Autopilot migrates 23 routes, updates 41 tests, fixes Dockerfile</code>
     </div>
 
     <ul class="bullets">
@@ -1207,8 +1219,8 @@
     </ul>
 
     <div class="example-box">
-      <div class="example-label">🦆 Rubber Duck Debugging</div>
-      <code>"I think this race condition happens because the mutex isn't held during the callback. Am I wrong?" &mdash; Copilot spots the flaw you missed</code>
+      <div class="example-label">🦆 Real-World: Debugging a Production Memory Leak</div>
+      <code>"Our Node.js app leaks 50MB/hour after deploying the caching layer. I think the Redis client holds references after disconnect. Walk me through why." &mdash; Copilot finds the missing .unref() call</code>
     </div>
 
     <div class="slide-links">
@@ -1258,8 +1270,8 @@
     </ul>
 
     <div class="example-box">
-      <div class="example-label">💡 Auto-Review Setup</div>
-      <code>Repo Settings &rarr; Copilot &rarr; Code Review &rarr; Enable "Automatic reviews" &rarr; Choose triggers (all PRs / labeled / draft)</code>
+      <div class="example-label">🎬 Real-World: Catching a Security Flaw Before Merge</div>
+      <code>PR #287: Add user search endpoint<br>🤖 Copilot flags: "SQL injection risk — user input passed directly to query"<br>🔧 Suggests: parameterized query with $1 placeholder &rarr; click to apply</code>
     </div>
 
     <div class="slide-links">
@@ -1458,14 +1470,8 @@
     </div>
 
     <div class="example-box">
-      <div class="example-label">🧠 Repo as Context: What Copilot Reads</div>
-      <code>
-        README.md &rarr; project purpose, architecture<br>
-        .github/copilot-instructions.md &rarr; coding standards<br>
-        AGENTS.md &rarr; agent behavior rules<br>
-        tsconfig.json / .eslintrc &rarr; language conventions<br>
-        Existing code patterns &rarr; naming, structure, style
-      </code>
+      <div class="example-label">🎬 Real-World: Onboarding a New Developer</div>
+      <code>Day 1: Clone repo &rarr; Copilot reads README + instructions + patterns<br>💬 "How does the payment flow work?" &rarr; accurate answer from repo context<br>🤖 "Add a discount code feature" &rarr; follows existing patterns automatically</code>
     </div>
 
     <ul class="bullets">
@@ -1654,8 +1660,12 @@
       <li class="co">Start a session locally, then continue from GitHub.com or mobile</li>
       <li class="co">Use <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">--remote</code> at launch or <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">/remote on</code> mid-session</li>
       <li class="co"><code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">/chronicle</code> generates standup summaries, tips, and improvement suggestions</li>
-      <li class="co">Remote sessions are now available to all users</li>
-      <li class="co">Prefix prompts with <code style="background:var(--inset);padding:1px 5px;border-radius:3px;color:var(--coral);">&amp;</code> to delegate work in the background</li>
+    </ul>
+
+    <div class="example-box">
+      <div class="example-label">🎬 Real-World: Start at Desk, Continue on Train</div>
+      <code>💻 Office: copilot --remote "Refactor the billing module"<br>🚆 Commute: Open GitHub.com on phone &rarr; review progress &rarr; approve changes<br>🏠 Home: /chronicle &rarr; get standup summary of everything done today</code>
+    </div>
     </ul>
 
     <div class="slide-links">
@@ -1747,9 +1757,12 @@
       <li class="yl"><strong>Shift+Tab</strong> cycles Ask &rarr; Plan &rarr; Autopilot in the CLI</li>
       <li class="yl">Use <strong>Ask</strong> for quick lookups that shouldn&rsquo;t pollute context</li>
       <li class="yl">Use <strong>Plan</strong> before complex work &mdash; the critic agent catches flaws early</li>
-      <li class="yl">Use <strong>Agent</strong> for hands-on coding with iterative self-correction</li>
-      <li class="yl">Use <strong>Autopilot</strong> after approving a plan &mdash; it builds while you review</li>
-      <li class="yl">Use <strong>Research</strong> before everything else to gather intelligence first</li>
+    </ul>
+
+    <div class="example-box">
+      <div class="example-label">🎬 Real-World: Building a New Feature End-to-End</div>
+      <code>🔬 /research "How do competitors implement SSO?" &rarr; report.md<br>💬 Ask: "What OAuth library fits our stack?" &rarr; recommends next-auth<br>📝 Plan: "Add SSO with Google + SAML" &rarr; 12-step plan.md reviewed by critic<br>🤖 Agent: Implements steps 1-8 with tests &rarr; ⚡ Autopilot finishes 9-12</code>
+    </div>
     </ul>
 
     <div class="slide-links">
